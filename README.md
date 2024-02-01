@@ -30,28 +30,24 @@ To get started with the project, follow these steps:
 
    ```bash
    git clone https://github.com/ysebo/eCommerce.git
-### Clone the Repository
-```bash
-git clone https://github.com/ysebo/eCommerce.git
-
-
-bash
-
-Copy code
-cd eCommerce
-Install dependencies:
-
-Copy code
+### Copy code 
+ ```bash
+ cd eCommerce
+ ```
+### Install dependencies:
+ ```bash
 npm install
-Set up environment variables:
+ ```
+###Set up environment variables:
 
 Create a .env file in the root directory.
 Define environment variables such as database connection URI, JWT secret, and any other necessary configurations.
 Run the application:
 
 sql
-Copy code
+ ```bash
 npm start
+ ```
 Access the application in your web browser at http://localhost:8012.
 
 Contributing
