@@ -1,4 +1,4 @@
-# Welcome to Our eCommerce shop project
+# Welcome to Our eCommerce shop 
 ### 🛋️🏡✨
 
 
