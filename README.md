@@ -1,7 +1,8 @@
 # Welcome to Our eCommerce shop project
 ### 🛋️🏡✨
 
-
+[![Build Status](https://travis-ci.org/yourusername/your-library.svg?branch=master)](https://travis-ci.org/ysebo/eCommerce)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 ## Table of Contents
 - [Installation](#installation)
 
