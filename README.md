@@ -1,5 +1,5 @@
-Welcome to Our Furniture Haven!
-🛋️🏡✨
+### Welcome to Our Furniture Haven!
+### 🛋️🏡✨
 
 
 ## Table of Contents
