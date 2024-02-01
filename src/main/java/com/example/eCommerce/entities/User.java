@@ -18,6 +18,8 @@ public class User implements UserDetails {
     private Long id;
 
 
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
