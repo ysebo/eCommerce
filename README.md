@@ -1,5 +1,7 @@
-Furniture Shop eCommerce Project
-Welcome to the Furniture Shop eCommerce project! This project aims to create an online platform where users can browse, search, and purchase furniture items from the comfort of their homes.
+Welcome to Our Furniture Haven!
+🛋️🏡✨
+
+
 ## Table of Contents
 - [Installation](#installation)
 
