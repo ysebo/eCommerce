@@ -22,14 +22,21 @@ Deployment: AWS, Heroku, or similar cloud platforms
 Installation
 To run the Furniture Shop eCommerce project locally, follow these steps:
 
-Clone the repository:
+## Getting Started
+
+To get started with the project, follow these steps:
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/ysebo/eCommerce.git
+### Clone the Repository
+```bash
+git clone https://github.com/ysebo/eCommerce.git
+
 
 bash
-Copy code
-git clone https://github.com/ysebo/eCommerce
-Navigate to the project directory:
 
-bash
 Copy code
 cd eCommerce
 Install dependencies:
