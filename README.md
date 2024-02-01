@@ -1,4 +1,4 @@
-### Welcome to Our Furniture Haven!
+# Welcome to Our eCommerce shop project
 ### 🛋️🏡✨
 
 
