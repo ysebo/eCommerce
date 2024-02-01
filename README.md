@@ -3,15 +3,16 @@ Welcome to the Furniture Shop eCommerce project! This project aims to create an 
 
 Overview
 The Furniture Shop eCommerce project is designed to provide users with a seamless shopping experience for furniture items. Whether users are looking for sofas, tables, chairs, or any other furniture pieces, they can explore a wide range of options available on the platform.
+## Table of Contents
+- [Installation](#installation)
 
-Features
-User Authentication: Users can create accounts, log in, and securely manage their profiles.
-Product Catalog: Browse through a diverse selection of furniture items categorized by type, style, material, and more.
-Search Functionality: Search for specific furniture items using keywords or filters to find exactly what you're looking for.
-Shopping Cart: Add items to your cart for easy checkout and purchase.
-Secure Checkout: Securely complete transactions with multiple payment options.
-Order Management: Track the status of orders and view order history.
-Responsive Design: Access the platform seamlessly across various devices including desktops, tablets, and smartphones.
+
+## Installation
+
+### Prerequisites
+- [Java](https://www.oracle.com/java/technologies/javase-downloads.html) (version x.x or higher)
+- [Maven](https://maven.apache.org/download.cgi)
+
 Technologies Used
 Frontend: HTML, CSS, JavaScript, React.js
 Backend: Java , Spring-boot
@@ -38,13 +39,10 @@ To get started with the project, follow these steps:
  ```bash
 npm install
  ```
-###Set up environment variables:
-
+Set up environment variables:
 Create a .env file in the root directory.
 Define environment variables such as database connection URI, JWT secret, and any other necessary configurations.
 Run the application:
-
-sql
  ```bash
 npm start
  ```
