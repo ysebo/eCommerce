@@ -1,8 +1,5 @@
 Furniture Shop eCommerce Project
 Welcome to the Furniture Shop eCommerce project! This project aims to create an online platform where users can browse, search, and purchase furniture items from the comfort of their homes.
-
-Overview
-The Furniture Shop eCommerce project is designed to provide users with a seamless shopping experience for furniture items. Whether users are looking for sofas, tables, chairs, or any other furniture pieces, they can explore a wide range of options available on the platform.
 ## Table of Contents
 - [Installation](#installation)
 
@@ -13,15 +10,7 @@ The Furniture Shop eCommerce project is designed to provide users with a seamles
 - [Java](https://www.oracle.com/java/technologies/javase-downloads.html) (version x.x or higher)
 - [Maven](https://maven.apache.org/download.cgi)
 
-Technologies Used
-Frontend: HTML, CSS, JavaScript, React.js
-Backend: Java , Spring-boot
-Database: Postgresql
-Authentication: JSON Web Tokens (JWT)
-Payment Processing: Stripe API (or any other payment gateway)
-Deployment: AWS, Heroku, or similar cloud platforms
-Installation
-To run the Furniture Shop eCommerce project locally, follow these steps:
+
 
 ## Getting Started
 
