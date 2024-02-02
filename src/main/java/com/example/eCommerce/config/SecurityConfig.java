@@ -9,13 +9,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-abstract class SecurityConfig {
+public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
         http.csrf(CsrfConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**", "/v3/api-docs/**",
-                                "/swagger-ui/**", "/swagger-ui.html", "/auth/**").permitAll()
+                                "/swagger-ui/**", "/swagger-ui.html", "/product/**" , "/user/**").permitAll()
 
                 )               ;
         return http.build();

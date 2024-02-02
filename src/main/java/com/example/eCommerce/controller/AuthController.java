@@ -1,6 +1,7 @@
 package com.example.eCommerce.controller;
 
 import com.example.eCommerce.dto.AuthLogin.AuthLoginRequest;
+import com.example.eCommerce.dto.AuthLogin.AuthLoginResponse;
 import com.example.eCommerce.dto.User.UserRegisterRequest;
 import com.example.eCommerce.service.AuthService;
 import lombok.AllArgsConstructor;
@@ -21,8 +22,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public void login(AuthLoginRequest authLoginRequest){
-        authService.login(authLoginRequest);
+    public AuthLoginResponse login(AuthLoginRequest authLoginRequest){
+        return authService.login(authLoginRequest);
     }
 
 }
