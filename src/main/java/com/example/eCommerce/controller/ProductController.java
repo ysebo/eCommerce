@@ -25,4 +25,9 @@ public class ProductController {
     public void deleteProductById(@PathVariable Long id){
         productService.deleteProductById(id);
     }
+
+    @GetMapping("/getProductByUnicode/{unicode}")
+    public ProductResponse getProductByUnicode(@PathVariable String unicode){
+        return productService.getProductByUnicode(unicode);
+    }
 }

@@ -19,14 +19,9 @@ public class Product {
     private String name;
     private Integer price;
     private String description;
-//    private String unicode;
 
-//    @Column(unique = true)
-//    @GeneratedValue(generator = "uuid2")
-//    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-//    private String unicode;
 
-    private String unicode = UUID.randomUUID().toString();
+    private String unicode = UUID.randomUUID().toString().substring(0, 13);
 
 
 

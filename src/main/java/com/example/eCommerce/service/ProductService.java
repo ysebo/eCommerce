@@ -9,4 +9,6 @@ public interface ProductService {
     ProductResponse getProductById(Long id);
 
     void deleteProductById(Long id);
+
+    ProductResponse getProductByUnicode(String unicode);
 }
