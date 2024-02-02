@@ -41,4 +41,13 @@ public class ProductServiceImpl implements ProductService {
             throw new NotFoundException("product not found with id:"+id+"!", HttpStatus.BAD_REQUEST);
         productRepository.deleteById(id);
     }
+
+    @Override
+    public ProductResponse getProductByUnicode(String unicode) {
+        Product product = productRepository.findByUnicode(unicode);
+        if (product == null) {
+            throw new NotFoundException("Product not found with unicode: " + unicode + "!", HttpStatus.NOT_FOUND);
+        }
+        return productMapper.toDto(product);
+    }
 }
