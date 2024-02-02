@@ -3,7 +3,7 @@ package com.example.eCommerce.controller;
 import com.example.eCommerce.dto.AuthLogin.AuthLoginRequest;
 import com.example.eCommerce.dto.AuthLogin.AuthLoginResponse;
 import com.example.eCommerce.dto.User.UserRegisterRequest;
-import com.example.eCommerce.service.AuthService;
+import com.example.eCommerce.service.auth.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
