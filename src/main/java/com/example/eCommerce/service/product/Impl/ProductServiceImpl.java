@@ -1,4 +1,4 @@
-package com.example.eCommerce.service.Impl;
+package com.example.eCommerce.service.product.Impl;
 
 import com.example.eCommerce.dto.Product.ProductRequest;
 import com.example.eCommerce.dto.Product.ProductResponse;
@@ -6,7 +6,7 @@ import com.example.eCommerce.entities.Product;
 import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.mapper.ProductMapper;
 import com.example.eCommerce.repositories.ProductRepository;
-import com.example.eCommerce.service.ProductService;
+import com.example.eCommerce.service.product.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

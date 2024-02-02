@@ -2,8 +2,7 @@ package com.example.eCommerce.controller;
 
 import com.example.eCommerce.dto.Product.ProductRequest;
 import com.example.eCommerce.dto.Product.ProductResponse;
-import com.example.eCommerce.repositories.ProductRepository;
-import com.example.eCommerce.service.ProductService;
+import com.example.eCommerce.service.product.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.example.eCommerce.service;
+package com.example.eCommerce.service.auth;
 
 import com.example.eCommerce.dto.AuthLogin.AuthLoginRequest;
 import com.example.eCommerce.dto.AuthLogin.AuthLoginResponse;
