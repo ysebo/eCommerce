@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RequestMapping("/product")
 public class ProductController {
-    private ProductService productService;
+    private final ProductService productService;
     @PostMapping("/addProduct")
     public void addProduct(@RequestBody ProductRequest productRequest){
         productService.addProduct(productRequest);

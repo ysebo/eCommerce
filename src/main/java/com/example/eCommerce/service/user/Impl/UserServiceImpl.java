@@ -4,6 +4,7 @@ import com.example.eCommerce.dto.User.UserRegisterRequest;
 import com.example.eCommerce.dto.User.UserRegisterResponse;
 import com.example.eCommerce.entities.User;
 import com.example.eCommerce.exception.NotFoundException;
+import com.example.eCommerce.mapper.UserMapper;
 import com.example.eCommerce.repositories.UserRepository;
 import com.example.eCommerce.service.user.UserService;
 import lombok.AllArgsConstructor;
@@ -14,8 +15,9 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
     @Override
     public void register(UserRegisterRequest userRequest) {
         if (userRequest.getEmail().isEmpty())
@@ -38,26 +40,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserRegisterResponse getById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()){
-            System.out.println("user is empty!");
-        }
-        else {
-            UserRegisterResponse userResponse = new UserRegisterResponse();
-            userResponse.setFirstName(user.get().getFirstName());
-            userResponse.setLastName(user.get().getLastName());
-            userResponse.setCompanyName(user.get().getCompanyName());
-            userResponse.setCountry(user.get().getCountry());
-            userResponse.setStreetAddress(user.get().getStreetAddress());
-            userResponse.setTownName(user.get().getTownName());
-            userResponse.setProvinceName(user.get().getProvinceName());
-            userResponse.setZipCode(user.get().getZipCode());
-            userResponse.setPhone(user.get().getPhone());
-            userResponse.setEmail(user.get().getEmail());
-            userResponse.setAdditionalInfo(user.get().getAdditionalInfo());
-            return userResponse;
-
-        }
-        return null;
+        if (user.isEmpty())
+            throw new NotFoundException("user not found with id:"+id+"!", HttpStatus.BAD_REQUEST);
+        return userMapper.toDto(user.get());
     }
 
     @Override
