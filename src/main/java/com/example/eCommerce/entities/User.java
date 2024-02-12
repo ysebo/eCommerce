@@ -32,19 +32,8 @@ public class User implements UserDetails {
     private String email;
     private String additionalInfo;
 
-//    private Role role;
 
 
-
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        if (role == null) {
-//            return Collections.singletonList(new SimpleGrantedAuthority("ROLE_DEFAULT"));
-//        }
-//        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.name()));
-//        return authorities;
-//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

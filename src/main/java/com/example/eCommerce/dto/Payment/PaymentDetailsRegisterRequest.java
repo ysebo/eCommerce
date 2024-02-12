@@ -1,13 +1,11 @@
-package com.example.eCommerce.dto.User;
+package com.example.eCommerce.dto.Payment;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-
-public class UserRegisterResponse {
-    private Long id;
+public class PaymentDetailsRegisterRequest {
     private String firstName;
     private String lastName;
     private String companyName;
@@ -20,4 +18,3 @@ public class UserRegisterResponse {
     private String email;
     private String additionalInfo;
 }
-

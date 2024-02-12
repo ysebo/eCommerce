@@ -1,10 +1,10 @@
 package com.example.eCommerce.service.user;
 
-import com.example.eCommerce.dto.User.UserRegisterRequest;
-import com.example.eCommerce.dto.User.UserRegisterResponse;
+import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterRequest;
+import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterResponse;
 
 public interface UserService {
-    void register(UserRegisterRequest userRequest);
-    UserRegisterResponse getById(Long id);
+    void register(PaymentDetailsRegisterRequest userRequest);
+    PaymentDetailsRegisterResponse getById(Long id);
     void deleteById(Long id);
 }
