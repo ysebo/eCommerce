@@ -21,7 +21,7 @@ public class Product {
     private String description;
 
 
-    private String unicode = UUID.randomUUID().toString().substring(0, 13);
+    private String SKU = UUID.randomUUID().toString().substring(0, 13);
 
 
 
