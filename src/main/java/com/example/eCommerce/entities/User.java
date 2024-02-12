@@ -19,19 +19,9 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String companyName;
-    private String country;
-    private String streetAddress;
-    private String townName;
-    private String provinceName;
-    private Integer ZipCode;
-    private Integer phone;
+    private String id;
     private String email;
-    private String additionalInfo;
-
+    private String password;
 
 
 
