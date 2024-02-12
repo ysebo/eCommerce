@@ -48,8 +48,20 @@ public class ProductServiceImpl implements ProductService{
     public ProductResponse getProductBySKU(String SKU) {
         Product product = productRepository.findBySKU(SKU);
         if (product == null) {
-            throw new NotFoundException("Product not found with unicode: " + SKU + "!", HttpStatus.NOT_FOUND);
+            throw new NotFoundException("Product not found with SKU: " + SKU + "!", HttpStatus.NOT_FOUND);
         }
         return productMapper.toDto(product);
     }
+
+    @Override
+    public void updateProductById(Long id, ProductRequest productRequest) {
+        Optional<Product> product = productRepository.findById(id);
+        if(product.isEmpty())
+            throw new NotFoundException("product not fount with id " + id + "!",  HttpStatus.BAD_REQUEST);
+        product.get().setName(productRequest.getName());
+        product.get().setDescription(productRequest.getDescription());
+        product.get().setPrice(productRequest.getPrice());
+        productRepository.save(product.get());
+    }
+
 }
