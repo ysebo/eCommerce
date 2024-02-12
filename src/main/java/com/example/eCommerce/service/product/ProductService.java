@@ -11,4 +11,6 @@ public interface ProductService {
     void deleteProductById(Long id);
 
     ProductResponse getProductBySKU(String SKU);
+
+    void updateProductById(Long id, ProductRequest productRequest);
 }
