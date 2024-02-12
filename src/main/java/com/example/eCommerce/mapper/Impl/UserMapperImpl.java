@@ -1,6 +1,6 @@
 package com.example.eCommerce.mapper.Impl;
 
-import com.example.eCommerce.dto.User.UserRegisterResponse;
+import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterResponse;
 import com.example.eCommerce.entities.User;
 import com.example.eCommerce.mapper.UserMapper;
 import org.springframework.stereotype.Component;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapperImpl implements UserMapper {
     @Override
-    public UserRegisterResponse toDto(User user) {
-        UserRegisterResponse userRegisterResponse = new UserRegisterResponse();
+    public PaymentDetailsRegisterResponse toDto(User user) {
+        PaymentDetailsRegisterResponse userRegisterResponse = new PaymentDetailsRegisterResponse();
         userRegisterResponse.setId(user.getId());
         userRegisterResponse.setFirstName(user.getFirstName());
         userRegisterResponse.setLastName(user.getLastName());

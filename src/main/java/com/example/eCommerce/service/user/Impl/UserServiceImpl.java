@@ -1,7 +1,7 @@
 package com.example.eCommerce.service.user.Impl;
 
-import com.example.eCommerce.dto.User.UserRegisterRequest;
-import com.example.eCommerce.dto.User.UserRegisterResponse;
+import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterRequest;
+import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterResponse;
 import com.example.eCommerce.entities.User;
 import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.mapper.UserMapper;
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     @Override
-    public void register(UserRegisterRequest userRequest) {
+    public void register(PaymentDetailsRegisterRequest userRequest) {
         if (userRequest.getEmail().isEmpty())
             throw new NotFoundException("Username can't be empty" , HttpStatus.BAD_GATEWAY);
         User user = new User();
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserRegisterResponse getById(Long id) {
+    public PaymentDetailsRegisterResponse getById(Long id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isEmpty())
             throw new NotFoundException("user not found with id:"+id+"!", HttpStatus.BAD_REQUEST);

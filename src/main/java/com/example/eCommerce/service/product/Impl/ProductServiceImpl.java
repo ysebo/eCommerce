@@ -42,11 +42,13 @@ public class ProductServiceImpl implements ProductService{
         productRepository.deleteById(id);
     }
 
+
+
     @Override
-    public ProductResponse getProductByUnicode(String unicode) {
-        Product product = productRepository.findByUnicode(unicode);
+    public ProductResponse getProductBySKU(String SKU) {
+        Product product = productRepository.findBySKU(SKU);
         if (product == null) {
-            throw new NotFoundException("Product not found with unicode: " + unicode + "!", HttpStatus.NOT_FOUND);
+            throw new NotFoundException("Product not found with unicode: " + SKU + "!", HttpStatus.NOT_FOUND);
         }
         return productMapper.toDto(product);
     }

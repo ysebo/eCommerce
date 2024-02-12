@@ -10,5 +10,5 @@ public interface ProductService {
 
     void deleteProductById(Long id);
 
-    ProductResponse getProductByUnicode(String unicode);
+    ProductResponse getProductBySKU(String SKU);
 }
