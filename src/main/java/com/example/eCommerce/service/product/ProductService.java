@@ -4,7 +4,6 @@ import com.example.eCommerce.dto.Product.ProductRequest;
 import com.example.eCommerce.dto.Product.ProductResponse;
 
 import java.util.List;
-
 public interface ProductService {
     void addProduct(ProductRequest productRequest);
 
@@ -13,5 +12,4 @@ public interface ProductService {
     void deleteProductById(Long id);
 
     ProductResponse getProductBySKU(String SKU);
-    List<ProductResponse> all();
 }

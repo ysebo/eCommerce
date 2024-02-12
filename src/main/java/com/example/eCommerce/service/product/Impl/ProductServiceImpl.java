@@ -55,8 +55,13 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<ProductResponse> all() {
-        List<Product> products = productRepository.findAll();
-        return productMapper.toDtos(products);
+    public void updateProductById(Long id, ProductRequest productRequest) {
+        Optional<Product> product = productRepository.findById(id);
+        if(product.isEmpty())
+            throw new NotFoundException("product not fount with id " + id + "!",  HttpStatus.BAD_REQUEST);
+        product.get().setName(productRequest.getName());
+        product.get().setDescription(productRequest.getDescription());
+        product.get().setPrice(productRequest.getPrice());
+        productRepository.save(product.get());
     }
-}
+
