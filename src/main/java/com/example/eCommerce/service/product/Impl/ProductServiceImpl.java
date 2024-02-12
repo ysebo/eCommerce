@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,8 +49,14 @@ public class ProductServiceImpl implements ProductService{
     public ProductResponse getProductBySKU(String SKU) {
         Product product = productRepository.findBySKU(SKU);
         if (product == null) {
-            throw new NotFoundException("Product not found with unicode: " + SKU + "!", HttpStatus.NOT_FOUND);
+            throw new NotFoundException("Product not found with SKU: " + SKU + "!", HttpStatus.NOT_FOUND);
         }
         return productMapper.toDto(product);
+    }
+
+    @Override
+    public List<ProductResponse> all() {
+        List<Product> products = productRepository.findAll();
+        return productMapper.toDtos(products);
     }
 }
