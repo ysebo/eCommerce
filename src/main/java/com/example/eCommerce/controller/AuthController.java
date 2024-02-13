@@ -17,8 +17,8 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public void register(@RequestBody PaymentDetailsRegisterRequest userRegisterRequest){
-        authService.register(userRegisterRequest);
+    public void register(@RequestBody AuthLoginRequest authLoginRequest){
+        authService.register(authLoginRequest);
     }
 
     @PostMapping("/login")

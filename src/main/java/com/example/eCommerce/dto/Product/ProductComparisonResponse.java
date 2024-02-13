@@ -14,4 +14,5 @@ public class ProductComparisonResponse {
     private String width;
     private String height ;
     private String weight;
+    private Integer price;
 }

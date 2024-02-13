@@ -3,7 +3,8 @@ package com.example.eCommerce.controller;
 import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterRequest;
 import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterResponse;
 import com.example.eCommerce.repositories.UserRepository;
-import com.example.eCommerce.service.user.UserService;
+import com.example.eCommerce.service.payment.PaymentService;
+import com.example.eCommerce.service.payment.PaymentServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,18 +13,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/order")
 public class OrderController {
     private final UserRepository userRepository;
-    private final UserService userService;
-//    @PostMapping("/register")
-//    public void register(@RequestBody PaymentDetailsRegisterRequest userRequest){
-//        userService.register(userRequest);
-//    }
+    private final PaymentService paymentService;
+    @PostMapping("/register")
+    public void register(@RequestBody PaymentDetailsRegisterRequest userRequest){
+        paymentService.register(userRequest);
+    }
     @GetMapping("/{id}")
     public PaymentDetailsRegisterResponse getById(@PathVariable Long id){
-        return userService.getById(id);
+        return paymentService.getById(id);
     }
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id ){
-        userService.deleteById(id);
+        paymentService.deleteById(id);
 
     }
 }
