@@ -31,7 +31,7 @@ public class ProductController {
     public ProductResponse getProductBySKU(@PathVariable String SKU){
         return productService.getProductBySKU(SKU);
     }
-    @PutMapping("/updateProduct/{id}")
+    @PutMapping("/updateBy/{id}")
     public void updateProductById(@PathVariable Long id, @RequestBody ProductRequest productRequest){
         productService.updateProductById(id, productRequest);
     }
