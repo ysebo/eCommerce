@@ -21,10 +21,12 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     @Override
-    public void register(PaymentDetailsRegisterRequest userRegisterRequest) {
-        if (userRepository.findByEmail(userRegisterRequest.getEmail()).isPresent())
-            throw new BadCredentialsException("user with email: "+userRegisterRequest.getEmail()+" is already exist!");
+    public void register(AuthLoginRequest authLoginRequest) {
+        if (userRepository.findByEmail(authLoginRequest.getEmail()).isPresent())
+            throw new BadCredentialsException("user with email: "+authLoginRequest.getEmail()+" is already exist!");
         User user = new User();
+        user.setPassword(authLoginRequest.getPassword());
+        user.setEmail(authLoginRequest.getEmail());
 
     }
 

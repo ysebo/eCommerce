@@ -5,7 +5,7 @@ import com.example.eCommerce.dto.AuthLogin.AuthLoginResponse;
 import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterRequest;
 
 public interface AuthService {
-    void register(PaymentDetailsRegisterRequest userRegisterRequest);
+    void register(AuthLoginRequest authLoginRequest);
 
     AuthLoginResponse login(AuthLoginRequest authLoginRequest);
 }
