@@ -17,7 +17,7 @@ public class ProductController {
     public void addProduct(@RequestBody ProductRequest productRequest){
         productService.addProduct(productRequest);
     }
-    @GetMapping("/getBy{id}")
+    @GetMapping("/getBy/{id}")
     public ProductResponse getProductById(@PathVariable Long id){
         return productService.getProductById(id);
     }
@@ -31,13 +31,13 @@ public class ProductController {
     public ProductResponse getProductBySKU(@PathVariable String SKU){
         return productService.getProductBySKU(SKU);
     }
+    @PutMapping("/updateProduct/{id}")
+    public void updateProductById(@PathVariable Long id, @RequestBody ProductRequest productRequest){
+        productService.updateProductById(id, productRequest);
+    }
     @GetMapping("/getAll")
     public List<ProductResponse> all(){
         return productService.all();
     }
 
-    @PutMapping("/updateProduct/{id}")
-    public void updateProductById(@PathVariable Long id, @RequestBody ProductRequest productRequest){
-        productService.updateProductById(id, productRequest);
-    }
 }
