@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 public class OrderController {
     private final UserRepository userRepository;
     private final UserService userService;
-    @PostMapping("/register")
-    public void register(@RequestBody PaymentDetailsRegisterRequest userRequest){
-        userService.register(userRequest);
-    }
+//    @PostMapping("/register")
+//    public void register(@RequestBody PaymentDetailsRegisterRequest userRequest){
+//        userService.register(userRequest);
+//    }
     @GetMapping("/{id}")
     public PaymentDetailsRegisterResponse getById(@PathVariable Long id){
         return userService.getById(id);

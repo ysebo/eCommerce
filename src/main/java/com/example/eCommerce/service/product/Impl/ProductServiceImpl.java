@@ -16,9 +16,10 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+
     @Override
     public void addProduct(ProductRequest productRequest) {
         Product product = new Product();
@@ -31,18 +32,17 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public ProductResponse getProductById(Long id) {
         Optional<Product> product = productRepository.findById(id);
-        if(product.isEmpty())
-            throw new NotFoundException("product not found with id:"+id+"!", HttpStatus.BAD_REQUEST);
+        if (product.isEmpty())
+            throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
         return productMapper.toDto(product.get());
     }
 
     @Override
     public void deleteProductById(Long id) {
         if (productRepository.findById(id).isEmpty())
-            throw new NotFoundException("product not found with id:"+id+"!", HttpStatus.BAD_REQUEST);
+            throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
         productRepository.deleteById(id);
     }
-
 
 
     @Override
@@ -57,11 +57,16 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public void updateProductById(Long id, ProductRequest productRequest) {
         Optional<Product> product = productRepository.findById(id);
-        if(product.isEmpty())
-            throw new NotFoundException("product not fount with id " + id + "!",  HttpStatus.BAD_REQUEST);
+        if (product.isEmpty())
+            throw new NotFoundException("product not fount with id " + id + "!", HttpStatus.BAD_REQUEST);
         product.get().setName(productRequest.getName());
         product.get().setDescription(productRequest.getDescription());
         product.get().setPrice(productRequest.getPrice());
         productRepository.save(product.get());
     }
+    public List<ProductResponse> all() {
+        List<Product> products = productRepository.findAll();
+        return productMapper.toDtos(products);
+    }
+}
 

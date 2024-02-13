@@ -2,6 +2,7 @@ package com.example.eCommerce.service.user.Impl;
 
 import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterRequest;
 import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterResponse;
+import com.example.eCommerce.dto.User.UserRequest;
 import com.example.eCommerce.entities.User;
 import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.mapper.UserMapper;
@@ -19,21 +20,12 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     @Override
-    public void register(PaymentDetailsRegisterRequest userRequest) {
+    public void register(UserRequest userRequest) {
         if (userRequest.getEmail().isEmpty())
             throw new NotFoundException("Username can't be empty" , HttpStatus.BAD_GATEWAY);
         User user = new User();
-        user.setFirstName(userRequest.getFirstName());
-        user.setLastName(userRequest.getLastName());
-        user.setCompanyName(userRequest.getCompanyName());
-        user.setCountry(userRequest.getCountry());
-        user.setStreetAddress(userRequest.getStreetAddress());
-        user.setTownName(userRequest.getTownName());
-        user.setProvinceName(userRequest.getProvinceName());
-        user.setZipCode(userRequest.getZipCode());
-        user.setPhone(userRequest.getPhone());
         user.setEmail(userRequest.getEmail());
-        user.setAdditionalInfo(userRequest.getAdditionalInfo());
+        user.setPassword(userRequest.getPassword());
         userRepository.save(user);
     }
 
