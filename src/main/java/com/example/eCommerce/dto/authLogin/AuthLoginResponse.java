@@ -1,4 +1,4 @@
-package com.example.eCommerce.dto.AuthLogin;
+package com.example.eCommerce.dto.authLogin;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +8,5 @@ import lombok.Setter;
 public class AuthLoginResponse {
     private Long id;
     private String email;
-    private String name;
     private String token;
 }

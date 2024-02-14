@@ -1,6 +1,6 @@
 package com.example.eCommerce.mapper;
 
-import com.example.eCommerce.dto.Product.ProductResponse;
+import com.example.eCommerce.dto.product.ProductResponse;
 import com.example.eCommerce.entities.Product;
 
 import java.util.List;

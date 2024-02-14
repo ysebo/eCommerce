@@ -1,7 +1,7 @@
-package com.example.eCommerce.service.product.Impl;
+package com.example.eCommerce.service.product.impl;
 
-import com.example.eCommerce.dto.Product.ProductRequest;
-import com.example.eCommerce.dto.Product.ProductResponse;
+import com.example.eCommerce.dto.product.ProductRequest;
+import com.example.eCommerce.dto.product.ProductResponse;
 import com.example.eCommerce.entities.Product;
 import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.mapper.ProductMapper;

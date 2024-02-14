@@ -1,11 +1,11 @@
-package com.example.eCommerce.service.payment;
+package com.example.eCommerce.service.payment.impl;
 
-import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterRequest;
-import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterResponse;
-import com.example.eCommerce.dto.User.UserRequest;
+import com.example.eCommerce.dto.payment.PaymentDetailsRegisterRequest;
+import com.example.eCommerce.dto.payment.PaymentDetailsRegisterResponse;
 import com.example.eCommerce.entities.Payment;
 import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.repositories.PaymentRepository;
+import com.example.eCommerce.service.payment.PaymentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 @Service
 @AllArgsConstructor
-public class PaymentServiceImpl implements  PaymentService{
+public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     @Override
     public void register(PaymentDetailsRegisterRequest userRequest) {

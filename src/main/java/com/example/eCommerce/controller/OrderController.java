@@ -1,10 +1,9 @@
 package com.example.eCommerce.controller;
 
-import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterRequest;
-import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterResponse;
+import com.example.eCommerce.dto.payment.PaymentDetailsRegisterRequest;
+import com.example.eCommerce.dto.payment.PaymentDetailsRegisterResponse;
 import com.example.eCommerce.repositories.UserRepository;
 import com.example.eCommerce.service.payment.PaymentService;
-import com.example.eCommerce.service.payment.PaymentServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
