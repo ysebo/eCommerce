@@ -19,6 +19,7 @@ public class Product {
     private String name;
     private Integer price;
     private String description;
+
     private String sales_Package;
     private String color;
     private String secondaryMaterial;
@@ -34,6 +35,10 @@ public class Product {
     private String domesticWarranty;
 
     private String SKU = UUID.randomUUID().toString().substring(0, 13);
+
+
+
+
 
 
 

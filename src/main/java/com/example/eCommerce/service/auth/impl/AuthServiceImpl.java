@@ -5,12 +5,14 @@ import com.example.eCommerce.dto.authLogin.AuthLoginRequest;
 import com.example.eCommerce.dto.authLogin.AuthLoginResponse;
 import com.example.eCommerce.entities.User;
 import com.example.eCommerce.exception.BadCredentialsException;
+import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.repositories.UserRepository;
 import com.example.eCommerce.service.auth.AuthService;
 import lombok.AllArgsConstructor;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -65,6 +67,13 @@ public class AuthServiceImpl implements AuthService {
             throw new RuntimeException(e);
         }
         return userRepository.findByEmail(String.valueOf(object.get("sub"))).orElseThrow(() -> new RuntimeException("user can be null"));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        if(userRepository.findById(id).isEmpty())
+            throw new NotFoundException("user not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
+        userRepository.deleteById(id);
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.eCommerce.controller;
 
+import com.example.eCommerce.dto.product.ProductComparisonResponse;
 import com.example.eCommerce.dto.product.ProductRequest;
 import com.example.eCommerce.dto.product.ProductResponse;
 import com.example.eCommerce.service.product.ProductService;
@@ -40,4 +41,8 @@ public class ProductController {
         return productService.all();
     }
 
+    @GetMapping("/getComparableProduct/{id}")
+    public ProductComparisonResponse getComparableProduct(@PathVariable Long id){
+        return productService.getComparableProduct(id);
+    }
 }
