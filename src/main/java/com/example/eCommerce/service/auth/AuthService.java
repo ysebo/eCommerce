@@ -9,4 +9,6 @@ public interface AuthService {
 
     AuthLoginResponse login(AuthLoginRequest authLoginRequest);
     User getUsernameFromToken(String token);
+
+    void deleteById(Long id);
 }

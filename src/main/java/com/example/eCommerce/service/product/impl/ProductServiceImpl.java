@@ -1,11 +1,15 @@
 package com.example.eCommerce.service.product.impl;
 
+import com.example.eCommerce.dto.product.ProductComparisonResponse;
 import com.example.eCommerce.dto.product.ProductRequest;
 import com.example.eCommerce.dto.product.ProductResponse;
 import com.example.eCommerce.entities.Product;
 import com.example.eCommerce.exception.NotFoundException;
+import com.example.eCommerce.mapper.ComparableProductMapper;
 import com.example.eCommerce.mapper.ProductMapper;
 import com.example.eCommerce.repositories.ProductRepository;
+
+
 import com.example.eCommerce.service.product.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,13 +23,28 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final ComparableProductMapper comparableProductMapper;
 
     @Override
     public void addProduct(ProductRequest productRequest) {
         Product product = new Product();
         product.setName(productRequest.getName());
         product.setPrice(productRequest.getPrice());
+
         product.setDescription(productRequest.getDescription());
+        product.setSales_Package(productRequest.getSales_Package());
+        product.setColor(productRequest.getColor());
+        product.setSecondaryMaterial(productRequest.getSecondaryMaterial());
+        product.setConfiguration(productRequest.getConfiguration());
+        product.setFillingMaterial(productRequest.getFillingMaterial());
+        product.setOriginOfManufacture(productRequest.getOriginOfManufacture());
+        product.setWidth(productRequest.getWidth());
+        product.setHeight(productRequest.getHeight());
+        product.setWeight(productRequest.getWeight());
+        product.setWarranty_summary(productRequest.getWarranty_summary());
+        product.setCovered_in_warranty(productRequest.getCovered_in_warranty());
+        product.setNotCoveredInWarranty(productRequest.getNotCoveredInWarranty());
+        product.setDomesticWarranty(productRequest.getDomesticWarranty());
         productRepository.save(product);
     }
 
@@ -57,6 +76,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductResponse> all() {
         return productMapper.toDtos(productRepository.findAll());
+    }
+
+    @Override
+    public ProductComparisonResponse getComparableProduct(Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        if(product.isEmpty())
+            throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
+        return comparableProductMapper.toDto(product.get());
+
     }
 
     @Override
