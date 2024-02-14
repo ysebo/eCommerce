@@ -1,5 +1,6 @@
 package com.example.eCommerce.controller;
 
+import com.example.eCommerce.dto.product.CategoryRequest;
 import com.example.eCommerce.dto.product.ProductComparisonResponse;
 import com.example.eCommerce.dto.product.ProductRequest;
 import com.example.eCommerce.dto.product.ProductResponse;
@@ -39,6 +40,11 @@ public class ProductController {
     @GetMapping("/getAll")
     public List<ProductResponse> all(){
         return productService.all();
+    }
+    @PostMapping("/add/category")
+    public String addCategory(@RequestBody CategoryRequest request){
+        productService.addCategory(request);
+        return "Category: " + request.getName() + " - added successfully!";
     }
 
     @GetMapping("/getComparableProduct/{id}")

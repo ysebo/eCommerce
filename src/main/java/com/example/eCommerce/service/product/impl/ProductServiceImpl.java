@@ -1,12 +1,16 @@
 package com.example.eCommerce.service.product.impl;
 
+import com.example.eCommerce.dto.product.CategoryRequest;
 import com.example.eCommerce.dto.product.ProductComparisonResponse;
 import com.example.eCommerce.dto.product.ProductRequest;
 import com.example.eCommerce.dto.product.ProductResponse;
+import com.example.eCommerce.entities.Category;
 import com.example.eCommerce.entities.Product;
+import com.example.eCommerce.exception.BadRequestException;
 import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.mapper.ComparableProductMapper;
 import com.example.eCommerce.mapper.ProductMapper;
+import com.example.eCommerce.repositories.CategoryRepository;
 import com.example.eCommerce.repositories.ProductRepository;
 
 
@@ -24,6 +28,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
     private final ComparableProductMapper comparableProductMapper;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public void addProduct(ProductRequest productRequest) {
@@ -76,6 +81,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductResponse> all() {
         return productMapper.toDtos(productRepository.findAll());
+    }
+
+    @Override
+    public void addCategory(CategoryRequest request) {
+        Optional<Category> category1 = categoryRepository.findByTitle(request.getName());
+        if(category1.isPresent())
+            throw new BadRequestException("This category already exists!");
+        Category category = new Category();
+        category.setName(request.getName());
+        categoryRepository.save(category);
     }
 
     @Override
