@@ -1,7 +1,7 @@
 package com.example.eCommerce.service.product;
 
-import com.example.eCommerce.dto.Product.ProductRequest;
-import com.example.eCommerce.dto.Product.ProductResponse;
+import com.example.eCommerce.dto.product.ProductRequest;
+import com.example.eCommerce.dto.product.ProductResponse;
 
 import java.util.List;
 public interface ProductService {

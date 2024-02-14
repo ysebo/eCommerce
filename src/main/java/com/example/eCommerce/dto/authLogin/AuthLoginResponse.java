@@ -1,4 +1,4 @@
-package com.example.eCommerce.dto.AuthLogin;
+package com.example.eCommerce.dto.authLogin;
 
 import lombok.Getter;
 import lombok.Setter;

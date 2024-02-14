@@ -1,11 +1,13 @@
-package com.example.eCommerce.dto.Payment;
+package com.example.eCommerce.dto.payment;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class PaymentDetailsRegisterRequest {
+
+public class PaymentDetailsRegisterResponse {
+    private Long id;
     private String firstName;
     private String lastName;
     private String companyName;
@@ -18,3 +20,4 @@ public class PaymentDetailsRegisterRequest {
     private String email;
     private String additionalInfo;
 }
+
