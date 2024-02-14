@@ -55,6 +55,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductResponse> all() {
+        return productMapper.toDtos(productRepository.findAll());
+    }
+
+    @Override
     public void updateProductById(Long id, ProductRequest productRequest) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isEmpty())
@@ -63,10 +68,7 @@ public class ProductServiceImpl implements ProductService {
         product.get().setDescription(productRequest.getDescription());
         product.get().setPrice(productRequest.getPrice());
         productRepository.save(product.get());
-    }
-    public List<ProductResponse> all() {
-        List<Product> products = productRepository.findAll();
-        return productMapper.toDtos(products);
-    }
-}
+    }}
+
+
 
