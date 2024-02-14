@@ -1,6 +1,6 @@
-package com.example.eCommerce.mapper.Impl;
+package com.example.eCommerce.mapper.impl;
 
-import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterResponse;
+import com.example.eCommerce.dto.payment.PaymentDetailsRegisterResponse;
 import com.example.eCommerce.entities.User;
 import com.example.eCommerce.mapper.UserMapper;
 import org.springframework.stereotype.Component;

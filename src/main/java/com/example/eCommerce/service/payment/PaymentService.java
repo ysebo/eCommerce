@@ -1,7 +1,7 @@
 package com.example.eCommerce.service.payment;
 
-import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterRequest;
-import com.example.eCommerce.dto.Payment.PaymentDetailsRegisterResponse;
+import com.example.eCommerce.dto.payment.PaymentDetailsRegisterRequest;
+import com.example.eCommerce.dto.payment.PaymentDetailsRegisterResponse;
 
 
 public interface PaymentService {
