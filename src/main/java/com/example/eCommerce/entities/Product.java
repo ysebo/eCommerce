@@ -42,6 +42,11 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private List<Tag> tags;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Review> reviews;
+
+
+
 
 
 
