@@ -85,12 +85,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void addCategory(CategoryRequest request) {
-        Optional<Category> category1 = categoryRepository.findByTitle(request.getName());
-        if(category1.isPresent())
-            throw new BadRequestException("This category already exists!");
-        Category category = new Category();
-        category.setName(request.getName());
-        categoryRepository.save(category);
+//        Optional<Category> category1 = categoryRepository.findByTitle(request.getName());
+//        if(category1.isPresent())
+//            throw new BadRequestException("This category already exists!");
+//        Category category = new Category();
+//        category.setName(request.getName());
+//        categoryRepository.save(category);
     }
 
     @Override
