@@ -30,6 +30,14 @@ public class User implements UserDetails {
     @OneToMany()
     private List<Review> reviews;
 
+
+
+    @OneToMany
+    private List<Product>products;
+    @OneToOne
+    private Cart cart;
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

@@ -4,6 +4,7 @@ import com.example.eCommerce.dto.authLogin.AuthLoginRequest;
 import com.example.eCommerce.dto.authLogin.AuthLoginResponse;
 import com.example.eCommerce.entities.User;
 
+
 public interface AuthService {
     void register(AuthLoginRequest authLoginRequest);
 

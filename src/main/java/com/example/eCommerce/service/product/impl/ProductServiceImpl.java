@@ -85,17 +85,18 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void addCategory(CategoryRequest request) {
-//        Optional<Category> category1 = categoryRepository.findByTitle(request.getName());
-//        if(category1.isPresent())
-//            throw new BadRequestException("This category already exists!");
-//        Category category = new Category();
-//        category.setName(request.getName());
-//        categoryRepository.save(category);
+        Optional<Category> category1 = categoryRepository.findByName(request.getName());
+        if(category1.isPresent())
+            throw new BadRequestException("This category already exists!");
+        Category category = new Category();
+        category.setName(request.getName());
+        categoryRepository.save(category);
     }
 
     @Override
     public ProductComparisonResponse getComparableProduct(Long id) {
         Optional<Product> product = productRepository.findById(id);
+
         if(product.isEmpty())
             throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
         return comparableProductMapper.toDto(product.get());
