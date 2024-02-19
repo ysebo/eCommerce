@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-//    Optional<Category> findByTitle(String title);
+    Optional<Category> findByName(String title);
 }
