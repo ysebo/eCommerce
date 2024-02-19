@@ -21,7 +21,6 @@ public class AuthController {
     public AuthLoginResponse login(AuthLoginRequest authLoginRequest){
         return authService.login(authLoginRequest);
     }
-
     @DeleteMapping("/deleteUser/{id}")
     public void deleteUserById(@PathVariable Long id){
         authService.deleteById(id);
