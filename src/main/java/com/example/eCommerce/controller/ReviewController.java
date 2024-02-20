@@ -15,8 +15,8 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @PostMapping("/add/{productId}")
-    public String addReview(@PathVariable Long productId, @RequestBody ReviewRequest reviewRequest){
-        reviewService.addReview(productId,reviewRequest);
+    public String addReview(@PathVariable Long productId, @RequestBody ReviewRequest reviewRequest , @RequestHeader("Authorization-Bearer") String token){
+        reviewService.addReview(productId,reviewRequest  , token );
         return "review was added";
     }
     @PutMapping("/update/{reviewId}")

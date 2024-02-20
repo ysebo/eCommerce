@@ -6,7 +6,7 @@ import com.example.eCommerce.dto.review.ReviewResponse;
 import java.util.List;
 
 public interface ReviewService{
-    void addReview(Long productId, ReviewRequest reviewRequest);
+    void addReview(Long productId, ReviewRequest reviewRequest , String token );
 
     void update(Long reviewId, ReviewRequest reviewRequest);
 
