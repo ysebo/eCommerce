@@ -4,10 +4,12 @@ import com.example.eCommerce.dto.review.ReviewRequest;
 import com.example.eCommerce.dto.review.ReviewResponse;
 import com.example.eCommerce.entities.Product;
 import com.example.eCommerce.entities.Review;
+import com.example.eCommerce.entities.User;
 import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.mapper.ReviewMapper;
 import com.example.eCommerce.repositories.ProductRepository;
 import com.example.eCommerce.repositories.ReviewRepository;
+import com.example.eCommerce.service.auth.AuthService;
 import com.example.eCommerce.service.review.ReviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,18 +24,24 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
     private final ProductRepository productRepository;
     private final ReviewMapper reviewMapper;
+    private final AuthService authService;
     @Override
-    public void addReview(Long productId, ReviewRequest reviewRequest) {
+    public void addReview(Long productId, ReviewRequest reviewRequest , String token ) {
         Optional<Product> productOp = productRepository.findById(productId);
         if(productOp.isEmpty())
             throw new NotFoundException("This product doesn't exist!", HttpStatus.NOT_FOUND);
         Product product = productOp.get();
 
+        User user = authService.getUsernameFromToken(token);
         Review review = new Review();
         review.setComment(reviewRequest.getComment());
         review.setRating(reviewRequest.getRating());
+        review.setUser(user);
+
         review.setProduct(product);
+
         reviewRepository.save(review);
+
 
     }
 
