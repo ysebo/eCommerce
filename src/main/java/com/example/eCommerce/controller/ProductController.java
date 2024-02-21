@@ -16,17 +16,18 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
     @PostMapping("/add")
-    public void addProduct(@RequestBody ProductRequest productRequest){
+    public String addProduct(@RequestBody ProductRequest productRequest){
         productService.addProduct(productRequest);
+        return  "Product " + productRequest.getName() + " was added successfully";
     }
     @GetMapping("/getBy/{id}")
     public ProductResponse getProductById(@PathVariable Long id){
         return productService.getProductById(id);
     }
-
     @DeleteMapping("/deleteBy/{id}")
-    public void deleteProductById(@PathVariable Long id){
+    public String deleteProductById(@PathVariable Long id){
         productService.deleteProductById(id);
+        return "Product with id :" + id + " was deleted successfully";
     }
 
     @GetMapping("/getBySKU/{SKU}")
@@ -34,8 +35,9 @@ public class ProductController {
         return productService.getProductBySKU(SKU);
     }
     @PutMapping("/updateBy/{id}")
-    public void updateProductById(@PathVariable Long id, @RequestBody ProductRequest productRequest){
+    public String updateProductById(@PathVariable Long id, @RequestBody ProductRequest productRequest){
         productService.updateProductById(id, productRequest);
+        return "Product with id:" +id + "was updated successfully ";
     }
     @GetMapping("/getAll")
     public List<ProductResponse> all(){
@@ -44,7 +46,7 @@ public class ProductController {
     @PostMapping("/add/category")
     public String addCategory(@RequestBody CategoryRequest request){
         productService.addCategory(request);
-        return "Category: " + request.getName() + " - added successfully!";
+        return "Category: " + request.getName() + " was added successfully!";
     }
 
     @GetMapping("/getComparableProduct/{id}")

@@ -15,14 +15,15 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @PostMapping("/add/{productId}")
-    public String addReview(@PathVariable Long productId, @RequestBody ReviewRequest reviewRequest, @RequestHeader("Authorization") String token){
-        reviewService.addReview(productId,reviewRequest, token);
-        return "review was added";
+    public String addReview(@PathVariable Long productId, @RequestBody ReviewRequest reviewRequest , @RequestHeader("Authorization-Bearer") String token){
+        reviewService.addReview(productId,reviewRequest  , token );
+        return "Review was added successfully!";
     }
     @PutMapping("/update/{reviewId}")
-    public String updateReview(@PathVariable Long reviewId, @RequestBody ReviewRequest reviewRequest, @RequestHeader("Authorization") String token){
-        reviewService.update(reviewId, reviewRequest, token);
-        return "Review was updated";
+    public String updateReview(@PathVariable Long reviewId, @RequestBody ReviewRequest reviewRequest){
+        reviewService.update(reviewId, reviewRequest);
+        return "Review was updated successfully!";
+
     }
 
     @GetMapping("/get/{reviewId}")
@@ -36,8 +37,10 @@ public class ReviewController {
     }
 
     @DeleteMapping("/delete/{reviewId}")
-    public String deleteReview(@PathVariable Long reviewId, @RequestHeader("Authorization") String token){
-        reviewService.deleteReview(reviewId,token);
-        return "review was deleted";
+
+    public String deleteReview(@PathVariable Long reviewId){
+        reviewService.deleteReview(reviewId);
+        return "Review was deleted successfully!";
+\
     }
 }
