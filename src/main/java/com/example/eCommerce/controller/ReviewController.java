@@ -23,6 +23,7 @@ public class ReviewController {
     public String updateReview(@PathVariable Long reviewId, @RequestBody ReviewRequest reviewRequest){
         reviewService.update(reviewId, reviewRequest);
         return "Review was updated successfully!";
+
     }
 
     @GetMapping("/get/{reviewId}")
@@ -36,8 +37,10 @@ public class ReviewController {
     }
 
     @DeleteMapping("/delete/{reviewId}")
+
     public String deleteReview(@PathVariable Long reviewId){
         reviewService.deleteReview(reviewId);
         return "Review was deleted successfully!";
+\
     }
 }

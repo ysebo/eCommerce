@@ -47,7 +47,10 @@ public class Product {
     @ManyToOne
     private User user;
 
-
+    @OneToOne()
+    private Favorite favorite;
+    @ManyToOne
+    private Cart cart;
 
 
 

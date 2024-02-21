@@ -6,13 +6,13 @@ import com.example.eCommerce.dto.review.ReviewResponse;
 import java.util.List;
 
 public interface ReviewService{
-    void addReview(Long productId, ReviewRequest reviewRequest , String token );
+    void addReview(Long productId, ReviewRequest reviewRequest, String token);
 
-    void update(Long reviewId, ReviewRequest reviewRequest);
+    void update(Long reviewId, ReviewRequest reviewRequest, String token);
 
     ReviewResponse getReview(Long reviewId);
 
     List<ReviewResponse> getProductReviews(Long productId);
 
-    void deleteReview(Long reviewId);
+    void deleteReview(Long reviewId, String token);
 }
