@@ -38,6 +38,11 @@ public class User implements UserDetails {
     private Cart cart;
 
 
+    @OneToMany()
+    private List<Favorite> favorites;
+
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

@@ -5,10 +5,12 @@ import com.example.eCommerce.dto.review.ReviewResponse;
 import com.example.eCommerce.entities.Product;
 import com.example.eCommerce.entities.Review;
 import com.example.eCommerce.entities.User;
+import com.example.eCommerce.exception.BlockedException;
 import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.mapper.ReviewMapper;
 import com.example.eCommerce.repositories.ProductRepository;
 import com.example.eCommerce.repositories.ReviewRepository;
+import com.example.eCommerce.repositories.UserRepository;
 import com.example.eCommerce.service.auth.AuthService;
 import com.example.eCommerce.service.review.ReviewService;
 import lombok.AllArgsConstructor;
@@ -23,33 +25,38 @@ import java.util.Optional;
 public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
     private final ProductRepository productRepository;
-    private final ReviewMapper reviewMapper;
     private final AuthService authService;
+    private final ReviewMapper reviewMapper;
     @Override
-    public void addReview(Long productId, ReviewRequest reviewRequest , String token ) {
+    public void addReview(Long productId, ReviewRequest reviewRequest, String token) {
         Optional<Product> productOp = productRepository.findById(productId);
         if(productOp.isEmpty())
             throw new NotFoundException("This product doesn't exist!", HttpStatus.NOT_FOUND);
         Product product = productOp.get();
-
         User user = authService.getUsernameFromToken(token);
+
         Review review = new Review();
         review.setComment(reviewRequest.getComment());
         review.setRating(reviewRequest.getRating());
-        review.setUser(user);
-
         review.setProduct(product);
-
+        review.setUser(user);
         reviewRepository.save(review);
-
 
     }
 
     @Override
-    public void update(Long reviewId, ReviewRequest reviewRequest) {
+    public void update(Long reviewId, ReviewRequest reviewRequest, String token) {
         Optional<Review> review = reviewRepository.findById(reviewId);
         if(review.isEmpty())
             throw new NotFoundException("review with this id doesn't exist :"+reviewId+"!", HttpStatus.BAD_REQUEST);
+
+        User user = authService.getUsernameFromToken(token);
+        Long userIdFromToken = user.getId();
+
+        Long userIdFromReview = review.get().getUser().getId();
+
+        if(!userIdFromToken.equals(userIdFromReview))
+            throw new BlockedException("It's not your review");
         review.get().setRating(reviewRequest.getRating());
         review.get().setComment(reviewRequest.getComment());
         reviewRepository.save(review.get());
@@ -72,9 +79,17 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void deleteReview(Long reviewId) {
-        if(reviewRepository.findById(reviewId).isEmpty())
-            throw new NotFoundException("This product doesn't exist!", HttpStatus.NOT_FOUND);
+    public void deleteReview(Long reviewId, String token) {
+        Optional<Review> review = reviewRepository.findById(reviewId);
+        if(review.isEmpty())
+            throw new NotFoundException("review with this id doesn't exist :"+reviewId+"!", HttpStatus.BAD_REQUEST);
+        User user = authService.getUsernameFromToken(token);
+        Long userIdFromToken = user.getId();
+
+        Long userIdFromReview = review.get().getUser().getId();
+
+        if(!userIdFromToken.equals(userIdFromReview))
+            throw new BlockedException("It's not your review");
         reviewRepository.deleteById(reviewId);
 
     }
