@@ -13,17 +13,21 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public void register(@RequestBody AuthLoginRequest authLoginRequest){
+    public String register(@RequestBody AuthLoginRequest authLoginRequest){
+
         authService.register(authLoginRequest);
+        return "User " + authLoginRequest.getEmail() + "registered successfully!";
     }
 
     @PostMapping("/login")
     public AuthLoginResponse login(AuthLoginRequest authLoginRequest){
+
         return authService.login(authLoginRequest);
     }
     @DeleteMapping("/deleteUser/{id}")
-    public void deleteUserById(@PathVariable Long id){
+    public String deleteUserById(@PathVariable Long id){
         authService.deleteById(id);
+        return "User " + id+ "deleted successfully!";
     }
 
 }

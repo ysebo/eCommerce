@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface CartRepostitory extends JpaRepository<Cart, Long> {
 
-
+    Optional<Cart> findBySKU(String SKU);
 
 }
