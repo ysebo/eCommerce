@@ -44,10 +44,9 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Review> reviews;
-    @ManyToOne
-    private User user;
 
-    @OneToOne()
+
+    @ManyToOne
     private Favorite favorite;
     @ManyToOne
     private Cart cart;
