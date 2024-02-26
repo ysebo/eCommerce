@@ -1,6 +1,7 @@
 package com.example.eCommerce.service.favorite.impl;
 
-import com.example.eCommerce.dto.FavoriteResponse;
+import com.example.eCommerce.dto.favorite.FavoriteResponse;
+import com.example.eCommerce.dto.product.ProductResponse;
 import com.example.eCommerce.entities.Favorite;
 import com.example.eCommerce.entities.Product;
 import com.example.eCommerce.entities.User;
@@ -15,9 +16,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.PrimitiveIterator;
 
 @Service
 @AllArgsConstructor
@@ -36,17 +37,18 @@ public class FavoriteServiceImpl implements FavoriteService {
             throw new NotFoundException("This product doesn't exist!", HttpStatus.NOT_FOUND);
         }
         User user = authService.getUsernameFromToken(token);
-        Favorite favorite = new Favorite();
-        favorite.setProduct(product.get());
-        favorite.setUser(user);
-        favoriteRepository.save(favorite);
-        product.get().setFavorite(favorite);
-        productRepository.save(product.get());
-        List<Favorite> favorites = user.getFavorites();
-        favorites.add(favorite);
-        user.setFavorites(favorites);
+        List<Product> favoriteProducts = user.getFavorites();
+        favoriteProducts.add(product.get());
         userRepository.save(user);
 
+
+    }
+    @Override
+    public List<ProductResponse> getFav(String token) {
+        System.out.println("fgfhgf");
+        User user = authService.getUsernameFromToken(token);
+        List<Product> userFavorites  =  user.getFavorites();
+        return favoriteMapper.toDtos(userFavorites);
     }
 
     @Override
@@ -58,30 +60,10 @@ public class FavoriteServiceImpl implements FavoriteService {
         }
 
         Product product = productOptional.get();
-        if (product.getFavorite() == null) {
-            throw new NotFoundException("This product is not a favorite!", HttpStatus.NOT_FOUND);
-        }
 
-        Favorite favorite = product.getFavorite();
-        favoriteRepository.deleteById(favorite.getId());
-
-        product.setFavorite(null);
+        User user = new User();
+        user.getFavorites().remove(product);
+        userRepository.save(user);
         productRepository.save(product);
-    }
-
-    @Override
-    public FavoriteResponse getFav(Long favoriteId, String token) {
-        System.out.println("fgfhgf");
-        Optional<Favorite> favorite = favoriteRepository.findById(favoriteId);
-        if (favorite.isEmpty()) {
-            throw new NotFoundException("Favorite with this id doesn't exist: " + favoriteId + "!", HttpStatus.BAD_REQUEST);
-        }
-        return favoriteMapper.toDto(favorite.get());
-    }
-
-    @Override
-    public List<FavoriteResponse> getUsersFav(String token) {
-        User user = authService.getUsernameFromToken(token);
-        return favoriteMapper.toDtos(user.getFavorites());
     }
 }

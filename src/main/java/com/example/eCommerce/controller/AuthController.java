@@ -16,7 +16,7 @@ public class AuthController {
     public String register(@RequestBody AuthLoginRequest authLoginRequest){
 
         authService.register(authLoginRequest);
-        return "User " + authLoginRequest.getEmail() + "registered successfully!";
+        return "User " + authLoginRequest.getEmail() + " registered successfully!";
     }
 
     @PostMapping("/login")
@@ -27,7 +27,8 @@ public class AuthController {
     @DeleteMapping("/deleteUser/{id}")
     public String deleteUserById(@PathVariable Long id){
         authService.deleteById(id);
-        return "User " + id+ "deleted successfully!";
+        return "User with" + id+ "deleted successfully!";
     }
+
 
 }

@@ -32,14 +32,14 @@ public class User implements UserDetails {
 
 
 
-    @OneToMany
+    @ManyToMany
     private List<Product>products;
     @OneToOne
     private Cart cart;
 
 
-    @OneToMany()
-    private List<Favorite> favorites;
+    @ManyToMany
+    private List<Product>favorites;
 
 
 
