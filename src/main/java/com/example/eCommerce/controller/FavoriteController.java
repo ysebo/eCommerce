@@ -1,11 +1,9 @@
 package com.example.eCommerce.controller;
 
-import com.example.eCommerce.dto.FavoriteResponse;
+import com.example.eCommerce.dto.favorite.FavoriteResponse;
+import com.example.eCommerce.dto.product.ProductResponse;
 import com.example.eCommerce.service.favorite.FavoriteService;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +16,7 @@ public class FavoriteController {
     @PostMapping("/add/{productId}")
     public String addProductToFav(@PathVariable Long productId, @RequestHeader("Authorization-Bearer") String token){
         favoriteService.addToFav(productId, token);
-        return "added product to favorite";
+        return " product added to favorite";
     }
 
     @DeleteMapping("/deleteFav/{productId}")
@@ -26,13 +24,8 @@ public class FavoriteController {
         favoriteService.deleteFav(productId, token);
     }
 
-    @GetMapping("/get/{favoriteId}")
-    public FavoriteResponse getFav(@PathVariable Long favoriteId, @RequestHeader("Authorization-Bearer") String token){
-        return favoriteService.getFav(favoriteId, token);
-    }
-
-    @GetMapping("/getUsersFav")
-    public List<FavoriteResponse> getUsersFav(@RequestHeader ("Authorization-Bearer") String token){
-        return favoriteService.getUsersFav(token);
+    @GetMapping("/get")
+    public List<ProductResponse> getFav(@RequestHeader("Authorization-Bearer") String token){
+        return favoriteService.getFav( token);
     }
 }
