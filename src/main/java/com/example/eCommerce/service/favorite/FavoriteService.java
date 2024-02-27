@@ -1,5 +1,6 @@
 package com.example.eCommerce.service.favorite;
 
+import com.example.eCommerce.dto.cart.CartRequest;
 import com.example.eCommerce.dto.favorite.FavoriteResponse;
 import com.example.eCommerce.dto.product.ProductResponse;
 
@@ -11,4 +12,6 @@ public interface FavoriteService {
     void deleteFav(Long productId, String token);
 
     List<ProductResponse> getFav(String token);
+
+    void updateFav(Long productId, String token);
 }

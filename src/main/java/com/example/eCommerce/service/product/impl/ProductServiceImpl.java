@@ -41,15 +41,11 @@ public class ProductServiceImpl implements ProductService {
         product.setColor(productRequest.getColor());
         product.setSecondaryMaterial(productRequest.getSecondaryMaterial());
         product.setConfiguration(productRequest.getConfiguration());
-        product.setFillingMaterial(productRequest.getFillingMaterial());
         product.setOriginOfManufacture(productRequest.getOriginOfManufacture());
         product.setWidth(productRequest.getWidth());
         product.setHeight(productRequest.getHeight());
         product.setWeight(productRequest.getWeight());
         product.setWarranty_summary(productRequest.getWarranty_summary());
-        product.setCovered_in_warranty(productRequest.getCovered_in_warranty());
-        product.setNotCoveredInWarranty(productRequest.getNotCoveredInWarranty());
-        product.setDomesticWarranty(productRequest.getDomesticWarranty());
         productRepository.save(product);
     }
 
@@ -111,8 +107,18 @@ public class ProductServiceImpl implements ProductService {
         product.get().setName(productRequest.getName());
         product.get().setDescription(productRequest.getDescription());
         product.get().setPrice(productRequest.getPrice());
+        product.get().setSales_Package(productRequest.getSales_Package());
+        product.get().setColor(productRequest.getColor());
+        product.get().setSecondaryMaterial(productRequest.getSecondaryMaterial());
+        product.get().setConfiguration(productRequest.getConfiguration());
+        product.get().setOriginOfManufacture(productRequest.getOriginOfManufacture());
+        product.get().setWidth(productRequest.getWidth());
+        product.get().setHeight(productRequest.getHeight());
+        product.get().setWeight(productRequest.getWeight());
+        product.get().setWarranty_summary(productRequest.getWarranty_summary());
         productRepository.save(product.get());
-    }}
+    }
+}
 
 
 
