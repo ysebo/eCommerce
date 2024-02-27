@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 
 public interface CartService {
-    void add(CartRequest cartRequest , String token );
-    CartResponse get(String token);
-    void delete(CartRequest cartRequest , String token);
+    void addToCart(CartRequest cartRequest , String token );
+    CartResponse getCart(String token);
+    void deleteCart(CartRequest cartRequest , String token);
+    void updateCart(CartRequest cartRequest , String token);
+    void buy( String token );
 }

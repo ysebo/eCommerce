@@ -18,15 +18,11 @@ public class ComparableProductMapperImpl implements ComparableProductMapper {
         productComp.setColor(product.getColor());
         productComp.setSecondaryMaterial(product.getSecondaryMaterial());
         productComp.setConfiguration(product.getConfiguration());
-        productComp.setFillingMaterial(product.getFillingMaterial());
         productComp.setOriginOfManufacture(product.getOriginOfManufacture());
         productComp.setWidth(product.getWidth());
         productComp.setHeight(product.getHeight());
         productComp.setWeight(product.getWeight());
         productComp.setWarranty_summary(product.getWarranty_summary());
-        productComp.setCovered_in_warranty(product.getCovered_in_warranty());
-        productComp.setNotCoveredInWarranty(product.getNotCoveredInWarranty());
-        productComp.setDomesticWarranty(product.getDomesticWarranty());
         return productComp;
     }
 }

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-
 @Entity
 @Getter
 @Setter
@@ -13,14 +12,11 @@ import java.util.List;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
-    private String SKU;
-    private Integer quantity;
-    private Integer price;
+    private Long id;
     @OneToOne
     private User user;
     @OneToMany
-    private List<Product> products;
+    private List<CartItem> cartItems;
 
 
 }
