@@ -1,5 +1,5 @@
-   # Welcome to Our eCommerce application 
-#### 🛋️🏡✨
+   #🎲
+   ## Welcome to eCommerce application
 
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -16,18 +16,28 @@
 - [Maven](https://maven.apache.org/download.cgi)
 
 ## High-level description
-Product Service: Manages product information, including adding, editing, deleting, and searching for products.
-Review Service: Manages product reviews, including adding, editing, deleting, and retrieving them.
-User Service: Handles user authentication, registration, and account management.
-Shopping Cart Service: Manages users' shopping carts, allowing them to add, update, and remove items.
-Order Service: Processes orders, including creating, managing, and tracking orders.
-Payment Service: Handles payment processing securely for online orders.
-Favorites Service: Allows users to add products to their favorites list for future reference.
+- Product Service: Manages product information, including adding, editing, deleting, and searching for products.<br>
+
+- Review Service: Manages product reviews, including adding, editing, deleting, and retrieving them.<br>
+
+- User Service: Handles user authentication, registration, and account management.<br>
+
+- Shopping Cart Service: Manages users' shopping carts, allowing them to add, update, and remove items.<br>
+
+- Order Service: Processes orders, including creating, managing, and tracking orders.<br>
+
+- Payment Service: Handles payment processing securely for online orders.<br>
+
+ - Favorites Service: Allows users to add products to their favorites list for future reference.<br>
+
 
 ## Architectural concepts
-Improved Scalability: Each service can be scaled independently based on its individual needs.
-Increased Fault Tolerance: If one service fails, the others can continue to function, minimizing downtime and impact on users.
-Enhanced Development and Deployment: Independent services can be developed, tested, and deployed independently, leading to faster development cycles.
+- Improved Scalability: Each service can be scaled independently based on its individual needs.<br>
+
+- Increased Fault Tolerance: If one service fails, the others can continue to function, minimizing downtime and impact on users.<br>
+
+- Enhanced Development and Deployment: Independent services can be developed, tested, and deployed independently, leading to faster development cycles.<br>
+
 
 ## Getting Started
 
