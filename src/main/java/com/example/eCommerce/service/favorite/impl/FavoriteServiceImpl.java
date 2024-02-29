@@ -60,6 +60,8 @@ public class FavoriteServiceImpl implements FavoriteService {
             throw new NotFoundException("This product doesn't exist , please choose another one! " , HttpStatus.NOT_FOUND);
         }
         List<Product> favoriteProducts = user.getFavorites();
+
+
     }
 
 

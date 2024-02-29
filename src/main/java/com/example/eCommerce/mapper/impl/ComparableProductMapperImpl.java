@@ -11,7 +11,7 @@ public class ComparableProductMapperImpl implements ComparableProductMapper {
 
 
     @Override
-    public ProductComparisonResponse toDto(Product product) {
+    public ProductComparisonResponse toDto(Product product ,Product product1) {
         ProductComparisonResponse productComp = new ProductComparisonResponse();
         productComp.setPrice(product.getPrice());
         productComp.setSales_Package(product.getSales_Package());
