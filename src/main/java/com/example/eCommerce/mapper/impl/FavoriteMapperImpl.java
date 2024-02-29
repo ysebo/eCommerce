@@ -18,7 +18,6 @@ public class FavoriteMapperImpl implements FavoriteMapper {
         ProductResponse productResponse = new ProductResponse();
         productResponse.setId(product.getId());
         productResponse.setName(product.getName());
-        productResponse.setSKU(product.getSKU());
         productResponse.setDescription(product.getDescription());
         productResponse.setPrice(product.getPrice());
         return productResponse;

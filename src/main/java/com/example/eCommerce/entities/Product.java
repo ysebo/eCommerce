@@ -46,6 +46,8 @@ public class Product {
     private Favorite favorite;
     @ManyToOne
     private Cart cart;
+    @ManyToOne
+    private OrderHistory orderHistory;
 
 
 

@@ -18,6 +18,5 @@ public interface ProductService {
     List<ProductResponse> all();
     void addCategory(CategoryRequest request);
 
-
-    ProductComparisonResponse getComparableProduct(Long id);
+    ProductComparisonResponse getComparableProduct(Long id , Long id2);
 }

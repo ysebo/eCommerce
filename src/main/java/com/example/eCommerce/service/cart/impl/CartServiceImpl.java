@@ -2,19 +2,20 @@ package com.example.eCommerce.service.cart.impl;
 
 import com.example.eCommerce.dto.cart.CartRequest;
 import com.example.eCommerce.dto.cart.CartResponse;
-import com.example.eCommerce.entities.Cart;
-import com.example.eCommerce.entities.CartItem;
-import com.example.eCommerce.entities.Product;
-import com.example.eCommerce.entities.User;
+import com.example.eCommerce.entities.*;
 import com.example.eCommerce.exception.BadRequestException;
+import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.mapper.CartMapper;
 import com.example.eCommerce.repositories.CartItemRepository;
 import com.example.eCommerce.repositories.CartRepostitory;
+import com.example.eCommerce.repositories.OrderHistoryRepository;
 import com.example.eCommerce.repositories.ProductRepository;
 import com.example.eCommerce.service.auth.AuthService;
 import com.example.eCommerce.service.cart.CartService;
+import jakarta.persistence.criteria.Order;
 import lombok.AllArgsConstructor;
 import org.aspectj.lang.reflect.NoSuchAdviceException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;

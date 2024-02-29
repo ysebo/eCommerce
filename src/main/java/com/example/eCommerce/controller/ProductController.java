@@ -18,6 +18,7 @@ public class ProductController {
     @PostMapping("/add")
     public String addProduct(@RequestBody ProductRequest productRequest){
         productService.addProduct(productRequest);
+
         return  "Product " + productRequest.getName() + " was added successfully";
     }
     @GetMapping("/getBy/{id}")
@@ -50,7 +51,7 @@ public class ProductController {
     }
 
     @GetMapping("/getComparableProduct/{id}")
-    public ProductComparisonResponse getComparableProduct(@PathVariable Long id){
-        return productService.getComparableProduct(id);
+    public ProductComparisonResponse getComparableProduct(@PathVariable Long id , Long id2){
+        return productService.getComparableProduct(id , id2);
     }
 }

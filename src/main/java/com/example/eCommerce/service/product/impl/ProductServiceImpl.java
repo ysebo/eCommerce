@@ -5,6 +5,7 @@ import com.example.eCommerce.dto.product.ProductComparisonResponse;
 import com.example.eCommerce.dto.product.ProductRequest;
 import com.example.eCommerce.dto.product.ProductResponse;
 import com.example.eCommerce.entities.Category;
+import com.example.eCommerce.entities.OrderHistory;
 import com.example.eCommerce.entities.Product;
 import com.example.eCommerce.exception.BadRequestException;
 import com.example.eCommerce.exception.NotFoundException;
@@ -35,7 +36,6 @@ public class ProductServiceImpl implements ProductService {
         Product product = new Product();
         product.setName(productRequest.getName());
         product.setPrice(productRequest.getPrice());
-
         product.setDescription(productRequest.getDescription());
         product.setSales_Package(productRequest.getSales_Package());
         product.setColor(productRequest.getColor());
@@ -90,12 +90,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductComparisonResponse getComparableProduct(Long id) {
+    public ProductComparisonResponse getComparableProduct(Long id ,  Long id2) {
         Optional<Product> product = productRepository.findById(id);
+        Optional<Product>product1= productRepository.findById(id);
 
         if(product.isEmpty())
             throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
-        return comparableProductMapper.toDto(product.get());
+        if(product1.isEmpty())
+            throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
+        return comparableProductMapper.toDto(product.get() , product1.get());
 
     }
 
