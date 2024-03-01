@@ -6,5 +6,6 @@ import com.example.eCommerce.entities.Product;
 import java.util.Optional;
 
 public interface ComparableProductMapper {
-    ProductComparisonResponse toDto(Product product);
+    ProductComparisonResponse toDto(Product product, Product product1);
+
 }

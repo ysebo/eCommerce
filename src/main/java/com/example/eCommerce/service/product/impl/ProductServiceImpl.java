@@ -5,6 +5,7 @@ import com.example.eCommerce.dto.product.ProductComparisonResponse;
 import com.example.eCommerce.dto.product.ProductRequest;
 import com.example.eCommerce.dto.product.ProductResponse;
 import com.example.eCommerce.entities.Category;
+import com.example.eCommerce.entities.OrderHistory;
 import com.example.eCommerce.entities.Product;
 import com.example.eCommerce.exception.BadRequestException;
 import com.example.eCommerce.exception.NotFoundException;
@@ -35,21 +36,16 @@ public class ProductServiceImpl implements ProductService {
         Product product = new Product();
         product.setName(productRequest.getName());
         product.setPrice(productRequest.getPrice());
-
         product.setDescription(productRequest.getDescription());
         product.setSales_Package(productRequest.getSales_Package());
         product.setColor(productRequest.getColor());
         product.setSecondaryMaterial(productRequest.getSecondaryMaterial());
         product.setConfiguration(productRequest.getConfiguration());
-        product.setFillingMaterial(productRequest.getFillingMaterial());
         product.setOriginOfManufacture(productRequest.getOriginOfManufacture());
         product.setWidth(productRequest.getWidth());
         product.setHeight(productRequest.getHeight());
         product.setWeight(productRequest.getWeight());
         product.setWarranty_summary(productRequest.getWarranty_summary());
-        product.setCovered_in_warranty(productRequest.getCovered_in_warranty());
-        product.setNotCoveredInWarranty(productRequest.getNotCoveredInWarranty());
-        product.setDomesticWarranty(productRequest.getDomesticWarranty());
         productRepository.save(product);
     }
 
@@ -94,12 +90,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductComparisonResponse getComparableProduct(Long id) {
+    public ProductComparisonResponse getComparableProduct(Long id ,  Long id2) {
         Optional<Product> product = productRepository.findById(id);
+        Optional<Product>product1= productRepository.findById(id);
 
         if(product.isEmpty())
             throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
-        return comparableProductMapper.toDto(product.get());
+        if(product1.isEmpty())
+            throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
+        return comparableProductMapper.toDto(product.get() , product1.get());
 
     }
 
@@ -111,8 +110,18 @@ public class ProductServiceImpl implements ProductService {
         product.get().setName(productRequest.getName());
         product.get().setDescription(productRequest.getDescription());
         product.get().setPrice(productRequest.getPrice());
+        product.get().setSales_Package(productRequest.getSales_Package());
+        product.get().setColor(productRequest.getColor());
+        product.get().setSecondaryMaterial(productRequest.getSecondaryMaterial());
+        product.get().setConfiguration(productRequest.getConfiguration());
+        product.get().setOriginOfManufacture(productRequest.getOriginOfManufacture());
+        product.get().setWidth(productRequest.getWidth());
+        product.get().setHeight(productRequest.getHeight());
+        product.get().setWeight(productRequest.getWeight());
+        product.get().setWarranty_summary(productRequest.getWarranty_summary());
         productRepository.save(product.get());
-    }}
+    }
+}
 
 
 

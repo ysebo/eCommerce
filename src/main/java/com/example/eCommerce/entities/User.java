@@ -1,6 +1,7 @@
 package com.example.eCommerce.entities;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,6 +41,8 @@ public class User implements UserDetails {
 
     @ManyToMany
     private List<Product>favorites;
+    @OneToMany
+    private List<OrderHistory> orderHistories;
 
 
 

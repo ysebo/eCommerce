@@ -21,20 +21,16 @@ public class Product {
     private String name;
     private Integer price;
     private String description;
-
     private String sales_Package;
     private String color;
     private String secondaryMaterial;
     private String configuration;
-    private String fillingMaterial;
     private String originOfManufacture;
     private String width;
     private String height ;
     private String weight;
     private String warranty_summary;
-    private String covered_in_warranty;
-    private String notCoveredInWarranty;
-    private String domesticWarranty;
+
 
     private String SKU = UUID.randomUUID().toString().substring(0, 13);
     @ElementCollection(targetClass = Tag.class, fetch = FetchType.EAGER)
@@ -50,6 +46,8 @@ public class Product {
     private Favorite favorite;
     @ManyToOne
     private Cart cart;
+    @ManyToOne
+    private OrderHistory orderHistory;
 
 
 
