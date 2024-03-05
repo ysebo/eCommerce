@@ -10,11 +10,9 @@ import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.mapper.ReviewMapper;
 import com.example.eCommerce.repositories.ProductRepository;
 import com.example.eCommerce.repositories.ReviewRepository;
-import com.example.eCommerce.repositories.UserRepository;
 import com.example.eCommerce.service.auth.AuthService;
 import com.example.eCommerce.service.review.ReviewService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +29,7 @@ public class ReviewServiceImpl implements ReviewService {
     public void addReview(Long productId, ReviewRequest reviewRequest, String token) {
         Optional<Product> productOp = productRepository.findById(productId);
         if(productOp.isEmpty())
-            throw new NotFoundException("This product doesn't exist!", HttpStatus.NOT_FOUND);
+            throw new NotFoundException("This product doesn't exist!");
         Product product = productOp.get();
         User user = authService.getUsernameFromToken(token);
 
@@ -48,7 +46,7 @@ public class ReviewServiceImpl implements ReviewService {
     public void update(Long reviewId, ReviewRequest reviewRequest, String token) {
         Optional<Review> review = reviewRepository.findById(reviewId);
         if(review.isEmpty())
-            throw new NotFoundException("review with this id doesn't exist :"+reviewId+"!", HttpStatus.BAD_REQUEST);
+            throw new NotFoundException("review with this id doesn't exist :"+reviewId+"!");
 
         User user = authService.getUsernameFromToken(token);
         Long userIdFromToken = user.getId();
@@ -66,7 +64,7 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewResponse getReview(Long reviewId) {
         Optional<Review> review = reviewRepository.findById(reviewId);
         if(review.isEmpty())
-            throw new NotFoundException("review with this id doesn't exist:"+reviewId+"!", HttpStatus.BAD_REQUEST);
+            throw new NotFoundException("review with this id doesn't exist:"+reviewId+"!");
         return reviewMapper.toDto(review.get());
     }
 
@@ -74,7 +72,7 @@ public class ReviewServiceImpl implements ReviewService {
     public List<ReviewResponse> getProductReviews(Long productId) {
         Optional<Product> product = productRepository.findById(productId);
         if(product.isEmpty())
-            throw new NotFoundException("This product doesn't exist!", HttpStatus.NOT_FOUND);
+            throw new NotFoundException("This product doesn't exist!");
         return reviewMapper.toDtos(product.get().getReviews());
     }
 
@@ -82,7 +80,7 @@ public class ReviewServiceImpl implements ReviewService {
     public void deleteReview(Long reviewId, String token) {
         Optional<Review> review = reviewRepository.findById(reviewId);
         if(review.isEmpty())
-            throw new NotFoundException("review with this id doesn't exist :"+reviewId+"!", HttpStatus.BAD_REQUEST);
+            throw new NotFoundException("review with this id doesn't exist :"+reviewId+"!");
         User user = authService.getUsernameFromToken(token);
         Long userIdFromToken = user.getId();
 

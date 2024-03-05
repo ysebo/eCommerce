@@ -7,7 +7,6 @@ import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.repositories.PaymentRepository;
 import com.example.eCommerce.service.payment.PaymentService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,7 +17,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public void register(PaymentDetailsRegisterRequest userRequest) {
         if(userRequest.getEmail().isEmpty())
-            throw new NotFoundException("Email can't be empty", HttpStatus.BAD_GATEWAY);
+            throw new NotFoundException("Email can't be empty");
         Payment payment = new Payment();
         payment.setZipCode(userRequest.getZipCode());
         payment.setTownName(userRequest.getTownName());
