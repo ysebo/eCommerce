@@ -1,12 +1,19 @@
 package com.example.eCommerce.dto.authLogin;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
-@Getter
-@Setter
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class AuthLoginResponse {
     private Long id;
     private String email;
-    private String token;
+    @JsonProperty("access_token")
+    private String accessToken;
+
+    @JsonProperty("refresh_token")
+    private String refreshToken;
 }

@@ -5,7 +5,6 @@ import com.example.eCommerce.dto.product.ProductComparisonResponse;
 import com.example.eCommerce.dto.product.ProductRequest;
 import com.example.eCommerce.dto.product.ProductResponse;
 import com.example.eCommerce.entities.Category;
-import com.example.eCommerce.entities.OrderHistory;
 import com.example.eCommerce.entities.Product;
 import com.example.eCommerce.exception.BadRequestException;
 import com.example.eCommerce.exception.NotFoundException;
@@ -17,7 +16,6 @@ import com.example.eCommerce.repositories.ProductRepository;
 
 import com.example.eCommerce.service.product.ProductService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,14 +51,14 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse getProductById(Long id) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isEmpty())
-            throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
+            throw new NotFoundException("product not found with id:" + id + "!");
         return productMapper.toDto(product.get());
     }
 
     @Override
     public void deleteProductById(Long id) {
         if (productRepository.findById(id).isEmpty())
-            throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
+            throw new NotFoundException("product not found with id:" + id + "!");
         productRepository.deleteById(id);
     }
 
@@ -69,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse getProductBySKU(String SKU) {
         Product product = productRepository.findBySKU(SKU);
         if (product == null) {
-            throw new NotFoundException("Product not found with SKU: " + SKU + "!", HttpStatus.NOT_FOUND);
+            throw new NotFoundException("Product not found with SKU: " + SKU + "!");
         }
         return productMapper.toDto(product);
     }
@@ -95,9 +93,9 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product>product1= productRepository.findById(id);
 
         if(product.isEmpty())
-            throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
+            throw new NotFoundException("product not found with id:" + id + "!");
         if(product1.isEmpty())
-            throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.BAD_REQUEST);
+            throw new NotFoundException("product not found with id:" + id + "!");
         return comparableProductMapper.toDto(product.get() , product1.get());
 
     }
@@ -106,7 +104,7 @@ public class ProductServiceImpl implements ProductService {
     public void updateProductById(Long id, ProductRequest productRequest) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isEmpty())
-            throw new NotFoundException("product not fount with id " + id + "!", HttpStatus.BAD_REQUEST);
+            throw new NotFoundException("product not fount with id " + id + "!");
         product.get().setName(productRequest.getName());
         product.get().setDescription(productRequest.getDescription());
         product.get().setPrice(productRequest.getPrice());
