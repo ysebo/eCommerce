@@ -1,5 +1,6 @@
 package com.example.eCommerce.controller;
 
+import com.example.eCommerce.dto.restock.RestockRequest;
 import com.example.eCommerce.dto.product.CategoryRequest;
 import com.example.eCommerce.dto.product.ProductComparisonResponse;
 import com.example.eCommerce.dto.product.ProductRequest;
@@ -34,6 +35,11 @@ public class ProductController {
     @GetMapping("/getBySKU/{SKU}")
     public ProductResponse getProductBySKU(@PathVariable String SKU){
         return productService.getProductBySKU(SKU);
+    }
+    @PutMapping("/restock/{id}")
+    public String restock(@PathVariable Long id , @RequestBody RestockRequest restockRequest ){
+        productService.restockProduct( id , restockRequest);
+        return "Product was successfully restocked!";
     }
     @PutMapping("/updateBy/{id}")
     public String updateProductById(@PathVariable Long id, @RequestBody ProductRequest productRequest){

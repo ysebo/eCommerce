@@ -27,11 +27,6 @@ public class CartMapperImpl implements CartMapper{
             subtotals.add(item.getSubtotal());
             total+= item.getSubtotal();
         }
-        cartResponse.setNames(names);
-        cartResponse.setTotal(total);
-        cartResponse.setSubtotals(subtotals);
-        cartResponse.setQuantitys(quantities);
-        cartResponse.setPrices(prices);
         return cartResponse;
     }
 }
