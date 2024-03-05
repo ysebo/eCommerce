@@ -16,8 +16,8 @@ public class CartController {
     private final ProductRepository productRepository;
     private final CartService cartService;
     @PostMapping("/add")
-    public String addToCart(@RequestBody CartRequest cartRequest, @RequestHeader("Authorization-Bearer") String token) {
-        cartService.addToCart(cartRequest, token);
+    public String addToCart(@PathVariable Long id , @RequestBody CartRequest cartRequest, @RequestHeader("Authorization-Bearer") String token) {
+        cartService.addToCart(id , cartRequest, token);
         return "Product was added to cart successfully!";
     }
 
@@ -32,13 +32,13 @@ public class CartController {
         return cartService.getCart(token);
     }
     @DeleteMapping("/delete")
-    public String deleteFromCart(@RequestBody CartRequest cartRequest , @RequestHeader("Authorization-Bearer")String token ){
-        cartService.deleteCart(cartRequest, token );
+    public String deleteFromCart(@PathVariable Long id  , @RequestBody CartRequest cartRequest , @RequestHeader("Authorization-Bearer")String token ){
+        cartService.deleteCart(id, cartRequest, token );
         return "Product was deleted from cart successfully!";
     }
     @PutMapping("/update")
-    public String updateCart(@RequestBody CartRequest cartRequest , @RequestHeader("Authorization-Bearer")String token) {
-        cartService.updateCart(cartRequest, token);
+    public String updateCart(@PathVariable Long id  ,@RequestBody CartRequest cartRequest , @RequestHeader("Authorization-Bearer")String token) {
+        cartService.updateCart(id , cartRequest, token);
         return ("Quantity was updated!");
     }
 }

@@ -15,6 +15,8 @@ public class ProductRequest {
     private String sales_Package;
     private String color;
     private String secondaryMaterial;
+    private Integer quantity;
+    private Boolean exist;
     private String configuration;
     private List<Tag> tags;
     private String originOfManufacture;

@@ -4,13 +4,14 @@ import com.example.eCommerce.config.JwtService;
 import com.example.eCommerce.dto.authLogin.AuthLoginRequest;
 import com.example.eCommerce.dto.authLogin.AuthLoginResponse;
 import com.example.eCommerce.entities.User;
+import com.example.eCommerce.token.TokenType;
 import com.example.eCommerce.exception.BadCredentialsException;
 import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.repositories.UserRepository;
 import com.example.eCommerce.service.auth.AuthService;
-import com.example.eCommerce.token.Token;
 import com.example.eCommerce.token.TokenRepository;
-import com.example.eCommerce.token.TokenType;
+import com.example.eCommerce.token.Token;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
