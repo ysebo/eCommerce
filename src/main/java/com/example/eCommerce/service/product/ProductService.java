@@ -1,5 +1,6 @@
 package com.example.eCommerce.service.product;
 
+import com.example.eCommerce.dto.restock.RestockRequest;
 import com.example.eCommerce.dto.product.CategoryRequest;
 import com.example.eCommerce.dto.product.ProductComparisonResponse;
 import com.example.eCommerce.dto.product.ProductRequest;
@@ -19,4 +20,5 @@ public interface ProductService {
     void addCategory(CategoryRequest request);
 
     ProductComparisonResponse getComparableProduct(Long id , Long id2);
+    void restockProduct(Long id , RestockRequest restockRequest);
 }

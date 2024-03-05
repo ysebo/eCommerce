@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -16,10 +17,12 @@ public class OrderHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
-    private LocalDate date;
-    private String firstname;
+    private LocalDateTime createDate;
+    private Integer total;
     private String additionalInfo;
-    private String email;
+    private String name;
+    private Integer price;
+    private Integer quantity;
     @ManyToOne(cascade = CascadeType.ALL)
     private Cart cart;
     @OneToMany

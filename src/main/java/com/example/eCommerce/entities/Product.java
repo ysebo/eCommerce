@@ -23,6 +23,8 @@ public class Product {
     private String description;
     private String sales_Package;
     private String color;
+    private Integer quantity;
+    private Boolean exist;
     private String secondaryMaterial;
     private String configuration;
     private String originOfManufacture;
@@ -48,6 +50,10 @@ public class Product {
     private Cart cart;
     @ManyToOne
     private OrderHistory orderHistory;
+    @OneToMany
+    private List<Image>images;
+
+
 
 
 

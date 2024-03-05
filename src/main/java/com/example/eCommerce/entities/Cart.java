@@ -17,6 +17,7 @@ public class Cart {
     private User user;
     @OneToMany
     private List<CartItem> cartItems;
-
+    @OneToMany
+    private List<OrderHistory> orderHistories;
 
 }

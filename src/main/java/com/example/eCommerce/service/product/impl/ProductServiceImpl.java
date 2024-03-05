@@ -1,9 +1,11 @@
 package com.example.eCommerce.service.product.impl;
 
+import com.example.eCommerce.dto.restock.RestockRequest;
 import com.example.eCommerce.dto.product.CategoryRequest;
 import com.example.eCommerce.dto.product.ProductComparisonResponse;
 import com.example.eCommerce.dto.product.ProductRequest;
 import com.example.eCommerce.dto.product.ProductResponse;
+import com.example.eCommerce.dto.restock.RestockRequest;
 import com.example.eCommerce.entities.Category;
 import com.example.eCommerce.entities.Product;
 import com.example.eCommerce.exception.BadRequestException;
@@ -16,6 +18,7 @@ import com.example.eCommerce.repositories.ProductRepository;
 
 import com.example.eCommerce.service.product.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,6 +47,15 @@ public class ProductServiceImpl implements ProductService {
         product.setHeight(productRequest.getHeight());
         product.setWeight(productRequest.getWeight());
         product.setWarranty_summary(productRequest.getWarranty_summary());
+        product.setQuantity(productRequest.getQuantity());
+        if(productRequest.getQuantity().equals(0)){
+            product.setExist(Boolean.FALSE);
+        }
+        else{
+            product.setExist(productRequest.getExist());
+        }
+
+
         productRepository.save(product);
     }
 
@@ -72,6 +84,7 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toDto(product);
     }
 
+
     @Override
     public List<ProductResponse> all() {
         return productMapper.toDtos(productRepository.findAll());
@@ -98,6 +111,19 @@ public class ProductServiceImpl implements ProductService {
             throw new NotFoundException("product not found with id:" + id + "!");
         return comparableProductMapper.toDto(product.get() , product1.get());
 
+    }
+
+
+
+    @Override
+    public void restockProduct(Long id, RestockRequest restockRequest) {
+        Optional<Product > product = productRepository.findById(id);
+        if(product.isEmpty()){
+            throw new NotFoundException("Product with this id:" + id +" wasn't found ");
+        }
+        product.get().setQuantity(restockRequest.getQuantity());
+        product.get().setExist(Boolean.TRUE);
+        productRepository.save(product.get());
     }
 
     @Override
