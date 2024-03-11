@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 
 public class ProductComparisonResponse {
+    private String name;
     private String sales_Package;
     private String color;
     private String secondaryMaterial;

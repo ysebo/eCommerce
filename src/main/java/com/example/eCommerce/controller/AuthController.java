@@ -37,7 +37,7 @@ public class AuthController {
     @DeleteMapping("/deleteUser/{id}")
     public String deleteUserById(@PathVariable Long id){
         authService.deleteById(id);
-        return "User with" + id+ "deleted successfully!";
+        return "User with id: " + id+ " was deleted successfully!";
     }
 
 

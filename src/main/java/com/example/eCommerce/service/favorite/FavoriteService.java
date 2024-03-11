@@ -13,5 +13,5 @@ public interface FavoriteService {
 
     List<ProductResponse> getFav(String token);
 
-    void updateFav(Long productId, String token);
+
 }

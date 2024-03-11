@@ -38,7 +38,7 @@ public class User implements UserDetails {
     private Cart cart;
 
 
-    @ManyToMany
+    @OneToMany
     private List<Product> favorites;
     @OneToMany
     private List<OrderHistory> orderHistories;
