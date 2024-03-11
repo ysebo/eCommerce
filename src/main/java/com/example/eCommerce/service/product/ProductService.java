@@ -19,6 +19,6 @@ public interface ProductService {
     List<ProductResponse> all();
     void addCategory(CategoryRequest request);
 
-    ProductComparisonResponse getComparableProduct(Long id , Long id2);
+    List<ProductComparisonResponse> getComparableProduct(Long id , Long id2);
     void restockProduct(Long id , RestockRequest restockRequest);
 }

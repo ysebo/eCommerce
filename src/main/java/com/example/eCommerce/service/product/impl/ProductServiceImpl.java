@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
             product.setExist(Boolean.FALSE);
         }
         else{
-            product.setExist(productRequest.getExist());
+            product.setExist(Boolean.TRUE);
         }
 
 
@@ -101,7 +101,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductComparisonResponse getComparableProduct(Long id ,  Long id2) {
+    public List<ProductComparisonResponse> getComparableProduct(Long id ,  Long id2) {
         Optional<Product> product = productRepository.findById(id);
         Optional<Product>product1= productRepository.findById(id);
 
@@ -109,7 +109,7 @@ public class ProductServiceImpl implements ProductService {
             throw new NotFoundException("product not found with id:" + id + "!");
         if(product1.isEmpty())
             throw new NotFoundException("product not found with id:" + id + "!");
-        return comparableProductMapper.toDto(product.get() , product1.get());
+        return (List<ProductComparisonResponse>) comparableProductMapper.toDto(product.get() , product1.get());
 
     }
 
@@ -118,10 +118,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void restockProduct(Long id, RestockRequest restockRequest) {
         Optional<Product > product = productRepository.findById(id);
+        Integer remainder = product.get().getQuantity();
         if(product.isEmpty()){
             throw new NotFoundException("Product with this id:" + id +" wasn't found ");
         }
-        product.get().setQuantity(restockRequest.getQuantity());
+        product.get().setQuantity(restockRequest.getQuantity()+remainder);
         product.get().setExist(Boolean.TRUE);
         productRepository.save(product.get());
     }
@@ -143,6 +144,7 @@ public class ProductServiceImpl implements ProductService {
         product.get().setHeight(productRequest.getHeight());
         product.get().setWeight(productRequest.getWeight());
         product.get().setWarranty_summary(productRequest.getWarranty_summary());
+        product.get().setQuantity(productRequest.getQuantity());
         productRepository.save(product.get());
     }
 }

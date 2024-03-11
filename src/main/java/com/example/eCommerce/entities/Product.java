@@ -50,7 +50,7 @@ public class Product {
     private Cart cart;
     @ManyToOne
     private OrderHistory orderHistory;
-    @OneToMany
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Image>images;
 
 
