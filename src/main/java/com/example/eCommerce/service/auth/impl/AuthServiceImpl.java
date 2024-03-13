@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -143,7 +144,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void deleteById(Long id) {
         if(userRepository.findById(id).isEmpty())
-            throw new NotFoundException("user not found with id: " + id + " !");
+            throw new NotFoundException("user not found with id: " + id + " !", HttpStatus.NOT_FOUND);
         List<Token> tokens = tokenRepository.findAllTokensByUserId(id);
         tokenRepository.deleteAll(tokens);
         userRepository.deleteById(id);

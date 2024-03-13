@@ -5,6 +5,7 @@ import com.example.eCommerce.dto.product.CategoryRequest;
 import com.example.eCommerce.dto.product.ProductComparisonResponse;
 import com.example.eCommerce.dto.product.ProductRequest;
 import com.example.eCommerce.dto.product.ProductResponse;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 public interface ProductService {
@@ -21,4 +22,5 @@ public interface ProductService {
 
     List<ProductComparisonResponse> getComparableProduct(Long id , Long id2);
     void restockProduct(Long id , RestockRequest restockRequest);
+    void uploadFile(String token, MultipartFile file, Long productId);
 }
