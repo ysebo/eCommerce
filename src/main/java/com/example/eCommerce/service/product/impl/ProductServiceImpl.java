@@ -6,21 +6,23 @@ import com.example.eCommerce.dto.product.ProductComparisonResponse;
 import com.example.eCommerce.dto.product.ProductRequest;
 import com.example.eCommerce.dto.product.ProductResponse;
 import com.example.eCommerce.dto.restock.RestockRequest;
-import com.example.eCommerce.entities.Category;
-import com.example.eCommerce.entities.Product;
+import com.example.eCommerce.entities.*;
 import com.example.eCommerce.exception.BadRequestException;
 import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.mapper.ComparableProductMapper;
 import com.example.eCommerce.mapper.ProductMapper;
-import com.example.eCommerce.repositories.CategoryRepository;
-import com.example.eCommerce.repositories.ProductRepository;
+import com.example.eCommerce.repositories.*;
 
 
+import com.example.eCommerce.service.auth.AuthService;
+import com.example.eCommerce.service.image.ImageService;
 import com.example.eCommerce.service.product.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +33,12 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
     private final ComparableProductMapper comparableProductMapper;
     private final CategoryRepository categoryRepository;
+    private final AuthService authService;
+    private final OrderHistoryRepository orderHistoryRepository;
+    private final CartItemRepository cartItemRepository;
+    private final ImageService imageService;
+    private final ImageRepository imageRepository;
+
 
     @Override
     public void addProduct(ProductRequest productRequest) {
@@ -63,14 +71,14 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse getProductById(Long id) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isEmpty())
-            throw new NotFoundException("product not found with id:" + id + "!");
+            throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.NOT_FOUND);
         return productMapper.toDto(product.get());
     }
 
     @Override
     public void deleteProductById(Long id) {
         if (productRepository.findById(id).isEmpty())
-            throw new NotFoundException("product not found with id:" + id + "!");
+            throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.NOT_FOUND);
         productRepository.deleteById(id);
     }
 
@@ -79,7 +87,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse getProductBySKU(String SKU) {
         Product product = productRepository.findBySKU(SKU);
         if (product == null) {
-            throw new NotFoundException("Product not found with SKU: " + SKU + "!");
+            throw new NotFoundException("Product not found with SKU: " + SKU + "!", HttpStatus.NOT_FOUND);
         }
         return productMapper.toDto(product);
     }
@@ -106,9 +114,9 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product>product1= productRepository.findById(id);
 
         if(product.isEmpty())
-            throw new NotFoundException("product not found with id:" + id + "!");
+            throw new NotFoundException("product not found with id:" + id + "!" , HttpStatus.NOT_FOUND);
         if(product1.isEmpty())
-            throw new NotFoundException("product not found with id:" + id + "!");
+            throw new NotFoundException("product not found with id:" + id + "!", HttpStatus.NOT_FOUND);
         return (List<ProductComparisonResponse>) comparableProductMapper.toDto(product.get() , product1.get());
 
     }
@@ -120,7 +128,7 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product > product = productRepository.findById(id);
         Integer remainder = product.get().getQuantity();
         if(product.isEmpty()){
-            throw new NotFoundException("Product with this id:" + id +" wasn't found ");
+            throw new NotFoundException("Product with this id:" + id +" wasn't found ", HttpStatus.NOT_FOUND);
         }
         product.get().setQuantity(restockRequest.getQuantity()+remainder);
         product.get().setExist(Boolean.TRUE);
@@ -128,10 +136,52 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void uploadFile(String token, MultipartFile file, Long productId) {
+        User user = authService.getUsernameFromToken(token);
+        Product product = productRepository.findById(productId).orElseThrow(() ->
+                new NotFoundException("product with id " + productId+ " was not found ", HttpStatus.NOT_FOUND));
+        if(user != product.getUser())
+            throw new BadRequestException("You can't edit this product!");
+        Image save;
+        List<OrderHistory> orders = null;
+        List<CartItem> items = null;
+        if(product.getImage() != null){
+            Image image = product.getImage();
+            items = image.getItems();
+            orders = image.getOrders();
+            save = imageService.uploadFile(file, image);
+            if(items != null){
+                List<CartItem> itemList = new ArrayList<>();
+                for(CartItem item: items){
+                    item.setImage(save);
+                    itemList.add(item);
+                    cartItemRepository.save(item);
+                }
+                save.setItems(itemList);
+            }
+            if(orders != null){
+                List<OrderHistory> orderList = new ArrayList<>();
+                for(OrderHistory order: orders){
+                    order.setImage(save);
+                    orderList.add(order);
+                    orderHistoryRepository.save(order);
+                }
+                save.setOrders(orderList);
+            }
+        } else save = imageService.uploadFile(file);
+
+        product.setImage(save);
+        productRepository.save(product);
+        save.setProduct(product);
+        imageRepository.save(save);
+    }
+
+
+    @Override
     public void updateProductById(Long id, ProductRequest productRequest) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isEmpty())
-            throw new NotFoundException("product not fount with id " + id + "!");
+            throw new NotFoundException("product not fount with id " + id + "!", HttpStatus.NOT_FOUND);
         product.get().setName(productRequest.getName());
         product.get().setDescription(productRequest.getDescription());
         product.get().setPrice(productRequest.getPrice());

@@ -2,7 +2,6 @@ package com.example.eCommerce.entities;
 
 import com.example.eCommerce.token.Token;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Order;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -16,9 +15,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "user_table")
 public class User implements UserDetails {
 
@@ -27,25 +23,18 @@ public class User implements UserDetails {
     private Long id;
     private String email;
     private String password;
-
-    @OneToMany()
+    @OneToMany
     private List<Review> reviews;
-
-
-    @ManyToMany
+    @OneToMany
     private List<Product> products;
     @OneToOne
     private Cart cart;
-
-
     @OneToMany
     private List<Product> favorites;
-    @OneToMany
-    private List<OrderHistory> orderHistories;
-
-
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
+    @OneToMany
+    private List<OrderHistory>orderHistories;
 
 
     @Override

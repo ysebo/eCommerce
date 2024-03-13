@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OrderHistoryService {
     List<OrderHistoryResponse> all(String token);
+    OrderHistoryResponse getById(String token, Long id);
+
 }
