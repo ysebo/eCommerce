@@ -14,9 +14,9 @@ public class OrderController {
     private final UserRepository userRepository;
     private final PaymentService paymentService;
     @PostMapping("/register")
-    public String  register(@RequestBody PaymentDetailsRegisterRequest userRequest){
+    public String register(@RequestBody PaymentDetailsRegisterRequest userRequest){
         paymentService.register(userRequest);
-        return "User " + userRequest.getFirstName() + "added successfully!";
+        return "User " + userRequest.getFirstName() + " added successfully!";
     }
     @GetMapping("/{id}")
     public PaymentDetailsRegisterResponse getById(@PathVariable Long id){
@@ -25,6 +25,6 @@ public class OrderController {
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Long id ){
         paymentService.deleteById(id);
-        return "User with id: " +id + "deleted successfully!";
+        return "User with id" +id + " deleted successfully!";
     }
 }

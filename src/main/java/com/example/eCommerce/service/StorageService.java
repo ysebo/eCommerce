@@ -21,7 +21,6 @@ public class StorageService {
 
     @Value("${application.bucket.name}")
     private String bucketName;
-
     @Autowired
     private AmazonS3 s3Client;
 

@@ -11,6 +11,13 @@ import java.util.List;
 
 @Component
 public class CartMapperImpl implements CartMapper{
+//    @Override
+//    public CartResponse toDto(Cart cart) {
+//        CartResponse cartResponse = new CartResponse();
+//        List<String> names = new ArrayList<>();
+//        cartResponse.setNames(names);
+//        return null;
+//    }
     @Override
     public CartResponse toDto(Cart cart) {
         CartResponse cartResponse = new CartResponse();
@@ -29,4 +36,5 @@ public class CartMapperImpl implements CartMapper{
         }
         return cartResponse;
     }
+
 }

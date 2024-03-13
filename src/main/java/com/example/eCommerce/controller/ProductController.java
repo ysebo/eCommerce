@@ -44,7 +44,7 @@ public class ProductController {
     @PutMapping("/updateBy/{id}")
     public String updateProductById(@PathVariable Long id, @RequestBody ProductRequest productRequest){
         productService.updateProductById(id, productRequest);
-        return "Product with id:" +id + "was updated successfully ";
+        return "Product with id: " +id + " was updated successfully ";
     }
     @GetMapping("/getAll")
     public List<ProductResponse> all(){
@@ -56,8 +56,8 @@ public class ProductController {
         return "Category: " + request.getName() + " was added successfully!";
     }
 
-    @GetMapping("/getComparableProduct/{id}")
-    public ProductComparisonResponse getComparableProduct(@PathVariable Long id , Long id2){
+    @GetMapping("/getComparableProduct/{id}/{id2}")
+    public List<ProductComparisonResponse> getComparableProduct(@PathVariable Long id ,@PathVariable Long id2){
         return productService.getComparableProduct(id , id2);
     }
 }

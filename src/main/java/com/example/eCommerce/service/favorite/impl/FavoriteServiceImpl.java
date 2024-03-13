@@ -3,6 +3,7 @@ package com.example.eCommerce.service.favorite.impl;
 import com.example.eCommerce.dto.product.ProductResponse;
 import com.example.eCommerce.entities.Product;
 import com.example.eCommerce.entities.User;
+import com.example.eCommerce.exception.BadCredentialsException;
 import com.example.eCommerce.exception.NotFoundException;
 import com.example.eCommerce.mapper.FavoriteMapper;
 import com.example.eCommerce.repositories.FavoriteRepository;
@@ -34,6 +35,9 @@ public class FavoriteServiceImpl implements FavoriteService {
         }
         User user = authService.getUsernameFromToken(token);
         List<Product> favoriteProducts = user.getFavorites();
+        if (favoriteProducts.stream().anyMatch(p -> p.getId().equals(productId))) {
+            throw new BadCredentialsException("This product is already in favorites!");
+        }
         favoriteProducts.add(product.get());
         userRepository.save(user);
 
@@ -47,19 +51,6 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
-    public void updateFav(Long productId, String token) {
-        User user = authService.getUsernameFromToken(token);
-        Optional<Product> product = productRepository.findById(productId);
-        if(product.isEmpty()){
-            throw new NotFoundException("This product doesn't exist , please choose another one! ");
-        }
-        List<Product> favoriteProducts = user.getFavorites();
-
-
-    }
-
-
-    @Override
     public void deleteFav(Long productId, String token) {
         Optional<Product> productOptional = productRepository.findById(productId);
 
@@ -68,8 +59,8 @@ public class FavoriteServiceImpl implements FavoriteService {
         }
 
         Product product = productOptional.get();
-
-        User user = new User();
+        User user = authService.getUsernameFromToken(token);
+//        User user = new User();
         user.getFavorites().remove(product);
         userRepository.save(user);
         productRepository.save(product);

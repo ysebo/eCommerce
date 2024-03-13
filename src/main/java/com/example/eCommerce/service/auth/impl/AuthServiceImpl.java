@@ -3,7 +3,9 @@ package com.example.eCommerce.service.auth.impl;
 import com.example.eCommerce.config.JwtService;
 import com.example.eCommerce.dto.authLogin.AuthLoginRequest;
 import com.example.eCommerce.dto.authLogin.AuthLoginResponse;
+import com.example.eCommerce.entities.Cart;
 import com.example.eCommerce.entities.User;
+import com.example.eCommerce.repositories.CartRepostitory;
 import com.example.eCommerce.token.TokenType;
 import com.example.eCommerce.exception.BadCredentialsException;
 import com.example.eCommerce.exception.NotFoundException;
@@ -27,6 +29,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 
 @Service
@@ -37,16 +40,28 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder encoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final CartRepostitory cartRepostitory;
 
     @Override
     public AuthLoginResponse register(AuthLoginRequest authLoginRequest) {
         if (userRepository.findByEmail(authLoginRequest.getEmail()).isPresent())
             throw new BadCredentialsException("user with email: "+authLoginRequest.getEmail()+" already exists!");
-        var user = User.builder()
-                .email(authLoginRequest.getEmail())
-                .password(encoder.encode(authLoginRequest.getPassword()))
-                .build();
+        User user = new User();
+        user.setEmail(authLoginRequest.getEmail());
+        user.setPassword(encoder.encode(authLoginRequest.getPassword()));
+        Cart cart = new Cart();
+        cartRepostitory.save(cart);
+        user.setCart(cart);
+
+
+//        var user = User.builder()
+//                .email(authLoginRequest.getEmail())
+//                .password(encoder.encode(authLoginRequest.getPassword()))
+//                .cart(cart)
+//                .build();
         var saveUser = userRepository.save(user);
+        cart.setUser(user);
+        cartRepostitory.save(cart);
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(saveUser, jwtToken);
@@ -128,7 +143,9 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void deleteById(Long id) {
         if(userRepository.findById(id).isEmpty())
-            throw new NotFoundException("user not found with id:" + id + "!");
+            throw new NotFoundException("user not found with id: " + id + " !");
+        List<Token> tokens = tokenRepository.findAllTokensByUserId(id);
+        tokenRepository.deleteAll(tokens);
         userRepository.deleteById(id);
     }
 

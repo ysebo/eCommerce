@@ -1,10 +1,12 @@
 package com.example.eCommerce.service.cart.impl;
 
+import com.example.eCommerce.dto.cart.CartItemResponse;
 import com.example.eCommerce.dto.cart.CartRequest;
 import com.example.eCommerce.dto.cart.CartResponse;
 import com.example.eCommerce.entities.*;
 import com.example.eCommerce.exception.BadRequestException;
 import com.example.eCommerce.exception.NotFoundException;
+import com.example.eCommerce.mapper.CartItemMapper;
 import com.example.eCommerce.mapper.CartMapper;
 import com.example.eCommerce.repositories.*;
 //import com.example.eCommerce.repositories.OrderHistoryRepository;
@@ -33,20 +35,25 @@ public class CartServiceImpl implements CartService {
     private final CartItemRepository cartItemRepository;
     private final OrderHistoryRepository orderHistoryRepository;
     private final UserRepository userRepository;
+    private final CartItemMapper cartItemMapper;
 
     @Override
-    public void addToCart(Long productId , CartRequest cartRequest, String token) {
+    public void addToCart(Long productId, CartRequest cartRequest, String token) {
         User user = authService.getUsernameFromToken(token);
-        Cart cart = cartRepostitory.findById(user.getId()).get();
+//        Cart cart = cartRepostitory.findById(user.getId()).get();
+        Optional<Cart> cart = cartRepostitory.findById(user.getCart().getId());
+        if(cart.isEmpty()){
+            throw new BadRequestException("cart is null");
+        }
         Optional<Product> product = productRepository.findById(productId);
         if(product.isEmpty()){
-            throw new BadRequestException("Product with id " + productId+ "doesn't exist!!!");
+            throw new BadRequestException("Product with id " + productId+ " doesn't exist!!!");
         }
         Optional<CartItem> Items = cartItemRepository.findById(productId);
         if(Items.isPresent()){
             throw new BadRequestException("Product already exist in cart!");
         }
-        if(cart.getCartItems().size()==10  ) {
+        if(cart.get().getCartItems().size()==10  ) {
             throw new BadRequestException("You can't add to cart , your cart is full");
         }
         CartItem item = new CartItem();
@@ -58,15 +65,15 @@ public class CartServiceImpl implements CartService {
         item.setCart(user.getCart());
         CartItem cartItem = cartItemRepository.saveAndFlush(item);
         List<CartItem > items = new ArrayList<>();
-        if(cart.getCartItems()!= null)items = cart.getCartItems();
+        if(cart.get().getCartItems()!= null)items = cart.get().getCartItems();
         items.add(cartItem);
-        cart.setCartItems(items);
-        cartRepostitory.save(cart);
+        cart.get().setCartItems(items);
+        cartRepostitory.save(cart.get());
     }
     @Override
     public void buy( String token) {
         User user = authService.getUsernameFromToken(token);
-        Cart cart = cartRepostitory.findById(user.getId()).get();
+        Cart cart = cartRepostitory.findById(user.getCart().getId()).get();
 
         if(cart.getCartItems().size() == 0){
             throw new BadRequestException("Your can't buy , your cart is empty");
@@ -78,7 +85,7 @@ public class CartServiceImpl implements CartService {
         }
         cart.setCartItems(null);
         cartRepostitory.save(cart);
-        for (CartItem item : items )cartItemRepository.delete(item);
+        cartItemRepository.deleteAll(items);
 
 
     }
@@ -103,28 +110,26 @@ public class CartServiceImpl implements CartService {
 
 
     @Override
-    public CartResponse getCart(String token) {
+    public List<CartItemResponse> getCart(String token) {
         User user = authService.getUsernameFromToken(token);
-        Cart cart = cartRepostitory.findById(user.getId()).get();
-        return cartMapper.toDto(cart);
+        Cart cart = cartRepostitory.findById(user.getCart().getId()).get();
+        return cartItemMapper.toDtos(cart.getCartItems());
     }
 
 
     @Override
-    public void deleteCart(Long id , CartRequest cartRequest, String token) {
+    public void deleteCart(Long id, String token) {
         User user = authService.getUsernameFromToken(token);
-        Cart cart = cartRepostitory.findById(user.getId()).get();
+        Cart cart = user.getCart();
         Optional<CartItem> item = cartItemRepository.findById(id);
         if(item.isEmpty()){
-            throw  new BadRequestException("Product with "+ id+ "doesn't exist");
+            throw  new BadRequestException("Product with "+ id+ " doesn't exist");
         }
         if(item.get().getCart() != cart){
             throw new BadRequestException("You can't delete it");
         }
-        cart.getCartItems().remove(item);
-        cartRepostitory.save(cart);
-        item.get().setCart(null);
-        cartItemRepository.save(item.get());
+        cart.getCartItems().remove(item.get());
+        cartItemRepository.deleteById(id);
 
 
     }

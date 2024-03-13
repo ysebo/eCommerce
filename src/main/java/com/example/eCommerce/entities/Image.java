@@ -13,6 +13,8 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
     private String name;
+    @JoinColumn(name = "path")
+    private String path;
     @ManyToOne
     private Product product;
 
