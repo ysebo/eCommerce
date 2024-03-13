@@ -1,5 +1,5 @@
-<img width="479" alt="Screenshot 2024-03-13 082004" src="https://github.com/ysebo/eCommerce/assets/147805133/b2878fb6-2544-47e2-a094-a205c7e23379">
 
+![Screenshot 2024-03-13 082004](https://github.com/ysebo/eCommerce/assets/147805133/55dcf7fb-3538-45c7-86cb-ee3c59526c90)
 
    ## Welcome to eCommerce application
 
