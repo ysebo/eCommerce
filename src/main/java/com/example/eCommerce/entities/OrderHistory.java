@@ -27,7 +27,10 @@ public class OrderHistory {
     private Cart cart;
     @OneToMany
     private List<Product> products;
-    @ManyToOne(cascade =CascadeType.ALL )
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Image image;
+    @ManyToOne
     private User user;
+
 
 }

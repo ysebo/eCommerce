@@ -20,7 +20,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public void register(PaymentDetailsRegisterRequest userRequest) {
         if (userRequest.getEmail().isEmpty())
-            throw new NotFoundException("Email can't be empty");
+            throw new NotFoundException("Email can't be empty", HttpStatus.NOT_FOUND);
         Payment payment = new Payment();
         payment.setZipCode(userRequest.getZipCode());
         payment.setTownName(userRequest.getTownName());
@@ -41,7 +41,7 @@ public class PaymentServiceImpl implements PaymentService {
     public PaymentDetailsRegisterResponse getById(Long id) {
         Optional<Payment> payment = paymentRepository.findById(id);
         if (payment.isEmpty()) {
-            throw new NotFoundException("This order wasn't found");
+            throw new NotFoundException("This order wasn't found", HttpStatus.NOT_FOUND);
         }
         PaymentDetailsRegisterResponse paymentDetailsRegisterResponse = new PaymentDetailsRegisterResponse();
         paymentDetailsRegisterResponse.setId(payment.get().getId());

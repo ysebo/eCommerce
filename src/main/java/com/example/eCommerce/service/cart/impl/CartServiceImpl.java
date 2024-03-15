@@ -82,11 +82,12 @@ public class CartServiceImpl implements CartService {
         for (CartItem item:items ) {
             item.setCart(null);
             addToHistory(item, user);
+            item.setCart(null);
         }
         cart.setCartItems(null);
         cartRepostitory.save(cart);
         cartItemRepository.deleteAll(items);
-
+        for (CartItem item : items)cartItemRepository.delete(item);
 
     }
 

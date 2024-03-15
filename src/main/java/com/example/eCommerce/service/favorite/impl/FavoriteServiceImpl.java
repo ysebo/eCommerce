@@ -12,6 +12,7 @@ import com.example.eCommerce.repositories.UserRepository;
 import com.example.eCommerce.service.auth.AuthService;
 import com.example.eCommerce.service.favorite.FavoriteService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     public void addToFav(Long productId, String token) {
         Optional<Product> product = productRepository.findById(productId);
         if (product.isEmpty()) {
-            throw new NotFoundException("This product doesn't exist!");
+            throw new NotFoundException("This product doesn't exist!", HttpStatus.NOT_FOUND);
         }
         User user = authService.getUsernameFromToken(token);
         List<Product> favoriteProducts = user.getFavorites();
@@ -55,7 +56,7 @@ public class FavoriteServiceImpl implements FavoriteService {
         Optional<Product> productOptional = productRepository.findById(productId);
 
         if (productOptional.isEmpty()) {
-            throw new NotFoundException("This product doesn't exist!");
+            throw new NotFoundException("This product doesn't exist!", HttpStatus.NOT_FOUND);
         }
 
         Product product = productOptional.get();

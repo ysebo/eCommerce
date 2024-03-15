@@ -10,9 +10,9 @@ public class NotFoundException extends RuntimeException {
 
     private final String message;
     @Getter
-    private HttpStatus httpStatus = null;
+    private final HttpStatus httpStatus;
 
-    public NotFoundException(String message) {
+    public NotFoundException(String message ,HttpStatus httpStatus) {
         this.message = message;
         this.httpStatus = httpStatus;
     }
@@ -21,5 +21,4 @@ public class NotFoundException extends RuntimeException {
     public String getMessage() {
         return message;
     }
-
 }

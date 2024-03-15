@@ -21,4 +21,6 @@ public class CartItem {
     private Integer total;
     @ManyToOne
     private Cart cart;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Image image;
 }
