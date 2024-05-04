@@ -14,7 +14,7 @@
 ## Installation
 
 ### Prerequisites
-- [Java](https://www.oracle.com/java/technologies/javase-downloads.html) (version x.x or higher)
+- [Java](https://www.oracle.com/java/technologies/javase-downloads.html) (version 15 or higher)
 - [Maven](https://maven.apache.org/download.cgi)
 
 ## High-level_description
